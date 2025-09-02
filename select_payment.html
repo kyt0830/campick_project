@@ -1,11 +1,11 @@
 <!-- 
  * 파일명: select_payment.html
- * 담당자: 미정
- * 작성일: 2025-08-28
- * 최근 수정일: 2025-08-28
+ * 담당자: 박연미
+ * 작성일: 2025-09-02
+ * 최근 수정일: 2025-09-02
  * 설명: 결제 방식 선택 HTML 템플릿
  * 수정이력:
- *  2025-08-28: 최초 작성
+ *  2025-09-02: 최초 작성
 -->
 
 <!DOCTYPE html>
@@ -14,11 +14,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/common.css">
+	<link rel="stylesheet" href="/css/select_payment.css">
     <title>Campick | 결제</title>
 </head>
 
 <body>
+    <div class="container">
+        <div class="header">
+            <a href="" class="back_button"><svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                    viewBox="0 -960 960 960" width="24px" fill="#222222">
+                    <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+                </svg></a>
+            <div class="medium_tb">
+                원하시는 결제방법을<br>
+                선택해 주세요.
+            </div>
+        </div>
 
+        <div class="content">
+            <div class="payment_option" onclick="selectPayment('delivery')" id="delivery">
+                <div class="radio_indicator"></div>
+                <div class="payment_title">택배거래</div>
+                <div class="payment_description small_tr">원하는 주소로 편메지에게 택배로 받을 수 있어요.</div>
+            </div>
+
+            <div class="payment_option " onclick="selectPayment('direct')" id="direct">
+                <div class="radio_indicator"></div>
+                <div class="payment_title">직거래</div>
+                <div class="payment_description small_tr">채팅으로 약속을 정하고 직접 만나 받을 수 있어요.</div>
+            </div>
+        </div>
+
+        <div class="payment_footer">
+            <div class="total_section">
+                <span class="medium_tb">결제 금액</span>
+                <span class="medium_tb">100,000 원</span>
+            </div>
+            <button class="pay_button btn_normal" onclick="processPayment()">다음</button>
+        </div>
+    </div>
 </body>
 
 </html>

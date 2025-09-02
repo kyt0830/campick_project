@@ -1,0 +1,517 @@
+/* 
+ * 파일명: common.css
+ * 담당자: 김영태
+ * 작성일: 2025-08-28
+ * 최근 수정일: 2025-08-29
+ * 설명:  공통 CSS 파일
+ * 수정이력:
+ *  2025-08-28: 최초 작성
+    2025-08-29: :root변수, ,font style, button style 작업(박연미)
+	2025-08-29: header, common_slider, user_profile, product_list 작업(김영태)
+*/
+
+/*variants*/
+:root {
+	--container: 780px;
+	--fz: 16px;
+	--lh: auto;
+	--primary: rgba(255, 62, 28, 1);
+	--black: rgba(51, 51, 51, 1);
+	--light_black: rgba(34, 34, 34, 1);
+	--white: rgba(255, 255, 255, 1);
+	--sub_text: rgba(147, 147, 147, 1);
+	--icon_color: rgba(82, 82, 82, 1);
+	--border_1: rgba(217, 217, 217, 1);
+	--border_2: rgba(243, 243, 243, 1);
+
+	--fz_12: 12px;
+	--fz_14: 14px;
+	--fz_16: 16px;
+	--fz_20: 20px;
+	--fz_28: 28px;
+
+	--mg_12: 12px;
+	--mg_24: 24px;
+	--mg_48: 48px;
+	--mg_72: 72px;
+
+}
+
+/*layout*/
+.container {
+	width: var(--container);
+	margin: 0 auto;
+}
+
+/*typography*/
+body {
+	font: var(--lh) "Inter";
+	font-size: var(--fz);
+	color: var(--black);
+	font-weight: 400;
+}
+
+.body_tb {
+	font: var(--lh);
+	font-size: var(--fz);
+	font-weight: 700;
+}
+
+.large_tb {
+	font: var(--lh);
+	font-size: calc(var(--fz) * 1.75);
+	font-weight: 700;
+}
+
+.large_tr {
+	font: calc(var(--lh) * 2);
+	font-size: calc(var(--fz) * 1.75);
+}
+
+.medium_tb {
+	font: var(--lh);
+	font-size: calc(var(--fz) * 1.25);
+	font-weight: 700;
+}
+
+.medium_tr {
+	font: var(--lh);
+	font-size: calc(var(--fz) * 1.125);
+}
+
+.normal_tb {
+	font: var(--lh);
+	font-weight: 700;
+}
+
+.small_tb {
+	font: var(--lh);
+	font-size: calc(var(--fz) * 0.875);
+	font-weight: 700;
+}
+
+.small_tr {
+	font: var(--lh);
+	font-size: calc(var(--fz) * 0.875);
+}
+
+.xsmall_tr {
+	font: var(--lh);
+	font-size: var(--fz_12);
+}
+
+/* button */
+/* normal button */
+.btn_normal {
+	background: #000;
+	color: var(--white);
+	font: var(--small_tr);
+	padding: 0 14px;
+	border-radius: 5px;
+	height: 40px;
+	display: inline-block;
+	transition: 0.3s;
+	line-height: 40px;
+}
+
+.btn_normal:hover {
+	background: var(--light_black);
+	color: var(--white);
+}
+
+.btn_half {
+	max-height: 362px;
+	width: 46.4%;
+}
+
+.btn_full {
+	width: 744px;
+}
+
+.btn_normal:disabled {
+	background: var(--border_1);
+	color: var(--white);
+}
+
+/* primary button */
+.btn_primary {
+	background: var(--primary);
+	color: var(--white);
+	font: var(--small_tr);
+	padding: 0 14px;
+	border-radius: 5px;
+	height: 40px;
+	display: inline-block;
+	transition: 0.3s;
+	line-height: 40px;
+}
+
+.btn_primary:hover {
+	background: #FF5132;
+	color: var(--white);
+}
+
+.btn_primary:disabled {
+	background: #FFB2A4;
+	color: var(--white);
+}
+
+/* outline button */
+.btn_outline {
+	background: var(--white);
+	color: var(--black);
+	border: 1px solid var(--black);
+	font: var(--small_tr);
+	padding: 0 14px;
+	border-radius: 5px;
+	height: 40px;
+	display: inline-block;
+	transition: 0.3s;
+	line-height: 40px;
+}
+
+.btn_outline:hover {
+	background: var(--black);
+	color: var(--white);
+}
+
+.btn_outline:disabled {
+	background: var(--border_2);
+	color: #999;
+	border-color: #999;
+}
+
+/* category */
+.category {
+	background: var(--white);
+	color: var(--black);
+	font: var(--small_tr);
+	padding: 0 12px;
+	border-radius: 15px;
+	height: 30px;
+	display: inline-block;
+	transition: 0.3s;
+	line-height: 30px;
+}
+
+.category:hover,
+.category:active,
+.category.selected {
+	background: var(--black);
+	color: var(--white);
+}
+
+/* common_silder */
+.common_slider_container {
+	width: 780px;
+	height: 240px;
+	position: relative;
+	background: var(--white);
+	overflow: hidden;
+}
+
+.common_slider_wrapper {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
+
+.common_slide_track {
+	display: flex;
+	width: 200%;
+	height: 100%;
+	transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.common_slide {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	height: 100%;
+}
+
+.common_slide:nth-child(1) {
+	background: url(../images/main_banner1.jpg) no-repeat center;
+}
+
+.common_slide:nth-child(2) {
+	background: url(../images/main_banner2.jpg) no-repeat center;
+}
+
+.slide_content {
+	position: absolute;
+	bottom: 24px;
+	left: 40px;
+	color: var(--white);
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+}
+
+.slide_title {
+	order: 2;
+	font-size: 30px;
+	font-weight: 700;
+}
+
+.slide_desc {
+	order: 1;
+	font-size: var(--fz_20);
+	font-weight: 400;
+}
+
+/* Navigation Arrows */
+.nav_arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 12px;
+	height: 24px;
+	cursor: pointer;
+	z-index: 10;
+}
+
+.nav_arrow.prev {
+	left: 24px;
+	background: url(../images/arrow_prev.svg) no-repeat center;
+}
+
+.nav_arrow.next {
+	right: 24px;
+	background: url(../images/arrow_next.svg) no-repeat center;
+}
+
+
+
+/* 사용자 프로필(마이페이지) */
+.user_profile_wrapper {
+	width: 100%;
+	max-width: 780px;
+	display: flex;
+	gap: 12px;
+	margin-bottom: var(--mg_48);
+}
+
+.profile_card {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 48px;
+	width: 440px;
+	background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+	border-radius: 5px;
+	padding: 22px 38px;
+	color: white;
+}
+
+.profile_img_wrapper {
+	width: 72px;
+	height: 72px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.profile_img_wrapper img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.user_info {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.stats_wrapper {
+	display: flex;
+	gap: 72px;
+	font-size: 12px;
+	text-align: center;
+}
+
+.stat_item {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+
+}
+
+.stat_title.stat_number {
+	font-size: var(--fz_12);
+	color: var(--white);
+	font-weight: 400;
+}
+
+.point_card {
+	width: 290px;
+	background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+	border-radius: 5px;
+	/* padding: 14px; */
+	color: white;
+	position: relative;
+}
+
+.point_card::after {
+	content: '';
+	display: block;
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	top: 14px;
+	left: 14px;
+	background-color: rgb(187, 89, 32);
+	border-radius: 5px;
+	z-index: 1;
+}
+
+.point_title {
+	margin-top: 24px;
+	margin-left: 27px;
+	font-size: 16px;
+	font-weight: 700;
+	position: relative;
+	z-index: 2;
+}
+
+.point_value {
+	font-size: 16px;
+	font-weight: 400;
+	text-align: right;
+	margin-right: 14px;
+	margin-bottom: 11px;
+}
+
+.button_group {
+	display: flex;
+	gap: 12px;
+	justify-content: flex-end;
+	position: relative;
+	margin-right: 14px;
+}
+
+.point_btn {
+	padding: 6px 12px;
+	border: 1px solid var(--white);
+	border-radius: 5px;
+	background: transparent;
+	color: white;
+	font-size: 12px;
+	font-weight: 400;
+	cursor: pointer;
+}
+
+
+/* product_list 3col ver  */
+.product_list_wrapper {
+	display: flex;
+	gap : 15px;
+}
+
+.product_card {
+	width: 250px;
+	background: white;
+	cursor: pointer;
+}
+
+.product_card a {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.product-_image img {
+	width: 100%;
+	object-fit: cover;
+}
+
+.product_info {
+	padding: 0 10px;
+}
+
+.product_title {
+	font-size: 12px;
+	color: #333;
+	font-weight: 700;
+	margin-bottom: 8px;
+}
+
+.product_meta {
+	font-size: 10px;
+	color: #828282;
+	font-weight: 400;
+	display: flex;
+	gap: 10px;
+	margin-bottom: 24px;
+}
+
+.product_location {
+	position: relative;
+}
+
+.product_location::after {
+	content: '';
+	display: block;
+	width: 1px;
+	height: 12px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: calc(100% + 5px);
+	background-color: #828282;
+}
+
+.product_footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.product_price {
+	font-size: 12px;
+}
+
+.product_stats {
+	display: flex;
+	gap: 8px;
+}
+
+.product_stats li {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.product_stats li p svg {
+	width: 14px;
+	height: 14px;
+}
+
+.product_stats li span {
+	font-size: 12px;
+	font-weight: 300;
+}
+
+/* common banner */
+.caution_banner {
+	width: calc(100% - 36px);
+	display: flex;
+	justify-content: center;
+	gap: calc(var(--mg_24) * 6);
+	padding: var(--mg_24) var(--mg_48);
+	margin: var(--mg_72) auto 80px;
+	border: 1px solid var(--border_1);
+	border-radius: 5px;
+}
+
+.caution_desc p {
+	margin-bottom: 4px;
+}
+
+.caution_desc a {
+	display: block;
+	text-align: right;
+}
