@@ -26,6 +26,69 @@
 </head>
 
 <body>
+  <!-- brand_popup -->
+  <div class="overlay"></div>
+  <div class="brand_popup">
+    <div class="search_input">
+      <h4 class="normal_tb">브랜드 검색</h4>
+      <div class="brand_search">
+        <input type="text" placeholder="어떤 상품을 찾으시나요?" />
+        <button type="button"></button>
+      </div>
+    </div>
+    <ul class="brand_list">
+      <li>
+        <label class="brand_item">
+          <span class="brand_title">힐레베르그 Hilleberg</span>
+          <input type="checkbox" name="brand" value="힐레베르그" />
+          <span class="custom_checkbox"></span>
+        </label>
+      </li>
+      <li>
+        <label class="brand_item">
+          <span class="brand_title">몽벨 Montbell</span>
+          <input type="checkbox" name="brand" value="몽벨" />
+          <span class="custom_checkbox"></span>
+        </label>
+      </li>
+      <li>
+        <label class="brand_item">
+          <span class="brand_title">헬리녹스 Helinox</span>
+          <input type="checkbox" name="brand" value="헬리녹스" />
+          <span class="custom_checkbox"></span>
+        </label>
+      </li>
+      <li>
+        <label class="brand_item">
+          <span class="brand_title">노르디스트 Nordisk</span>
+          <input type="checkbox" name="brand" value="노르디스트" />
+          <span class="custom_checkbox"></span>
+        </label>
+      </li>
+      <li>
+        <label class="brand_item">
+          <span class="brand_title">엠에스알 Msr</span>
+          <input type="checkbox" name="brand" value="엠에스알" />
+          <span class="custom_checkbox"></span>
+        </label>
+      </li>
+      <li>
+        <label class="brand_item">
+          <span class="brand_title">니모 Nemo</span>
+          <input type="checkbox" name="brand" value="니모" />
+          <span class="custom_checkbox"></span>
+        </label>
+      </li>
+      <li class="no_result">
+        <img src="images/store_logo_small.svg" alt="">
+        <p class="small_tb">검색 결과가 없습니다.</p>
+        <p class="small_tb">새로 검색해 보세요</p>
+      </li>
+    </ul>
+    <button class="apply_btn">적용하기</button>
+  </div>
+
+  <!-- brand_popup -->
   <div class="container">
     <!-- header -->
     <header>
@@ -105,63 +168,50 @@
     <!-- //header -->
 
     <main>
+      <!-- form -->
       <div class="form_content">
-        <div class="form-header">
-          <h1 class="form-title">내 상품 판매하기</h1>
-        </div>
-        <div>
-          <form action="">
-            <div class="image_upload">
-              <label for="imageInput" class="upload_box">
-                <span class="upload_icon" aria-hidden="true">
-                  <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px"
-                    fill="#939393">
-                    <path
-                      d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Z" />
-                  </svg>
-                </span>
-                <span class="upload_img_count">0/10</span>
-              </label>
-              <input type="file" id="imageInput" multiple accept="image/*" hidden>
-            </div>
+        <h2 class="form_title">내 상품 판매하기</h2>
+        <form action="">
+          <!-- 사진 업로드 -->
+          <div class="image_upload">
+            <label for="imageInput" class="upload_box">
+              <span class="upload_icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" height="32px" viewBox="0 -960 960 960" width="32px"
+                  fill="#939393">
+                  <path
+                    d="M480-260q75 0 127.5-52.5T660-440q0-75-52.5-127.5T480-620q-75 0-127.5 52.5T300-440q0 75 52.5 127.5T480-260Zm0-80q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM160-120q-33 0-56.5-23.5T80-200v-480q0-33 23.5-56.5T160-760h126l74-80h240l74 80h126q33 0 56.5 23.5T880-680v480q0 33-23.5 56.5T800-120H160Z" />
+                </svg>
+              </span>
+              <span class="upload_img_count small_tr">0/10</span>
+            </label>
+            <input type="file" id="imageInput" multiple accept="image/*" hidden>
+          </div>
 
-            <!-- 상품명 -->
-            <div class="product_title">
-              <label for="productName small_tr">상품명</label>
-              <input class="label_box" type="text" id="productName" name="productName" class="input-field" required>
-            </div>
-            <!-- 판매 가격 -->
-            <div class="product_pirce label_box">
-              <label for="productPrice small_tr">판매 가격</label>
-              <input class="label_box" type="number" id="productPrice" name="productPrice" class="input-field" min="0"
-                step="100" required>
-            </div>
+          <!-- 상품명 -->
+          <div class="product_title">
+            <label class="ir_pm" for="productName">상품명</label>
+            <input class="label_box" type="text" id="productName" placeholder="상품명" name="productName" required>
+          </div>
 
-            <!-- 카테고리 및 브랜드 -->
-            <div class="product_brand ">
-              <label class="label_box" for="categorySelect ">카테고리</label>
-              <select id="categorySelect" name="category" class="dropdown">
-                <option value="">선택하세요</option>
-                <option value="tent">텐트</option>
-                <option value="sleepingbag">침낭</option>
-                <option value="backpack">배낭</option>
-                <!-- 필요시 추가 -->
-              </select>
-            </div>
+          <!-- 판매 가격 -->
+          <div class="product_pirce">
+            <label class="ir_pm" for="productPrice">판매 가격</label>
+            <input class="label_box" type="text" id="productPrice" placeholder="판매 가격" name="productPrice" required>
+          </div>
 
-            <div class="dropdown-group">
-              <label for="brandSelect">브랜드</label>
-              <select id="brandSelect" name="brand" class="dropdown">
-                <option value="">선택하세요</option>
-                <option value="hilleberg">힐레베르그</option>
-                <option value="msr">MSR</option>
-                <option value="snowpeak">스노우피크</option>
-                <!-- 필요시 추가 -->
-              </select>
-            </div>
+          <!-- 카테고리-->
+          <div class="product_category">
+            <button type="button" class="category_btn">카테고리</button>
+          </div>
 
-            <!-- 제품 상태 -->
-            <h3 class="product_status_title">제품 상태</h3>
+          <!-- 브랜드 -->
+          <div class="product_brand">
+            <button type="button" class="brand_btn">브랜드</button>
+          </div>
+
+          <!-- 제품 상태 -->
+          <div class="product_status">
+            <h3 class="product_status_title normal_tb">제품 상태</h3>
             <div class="product_status_checkbox">
               <input type="radio" name="condition" value="new" id="new">
               <label class="small_tr" for="new">미개봉</label>
@@ -178,8 +228,11 @@
               <input type="radio" name="condition" value="repair" id="repair">
               <label class="small_tr" for="repair"> 수리/수선 필요</label>
             </div>
-            <!-- 보증서 유무 -->
-            <h3 class="warranty_status_title">보증서 유무</h3>
+          </div>
+
+          <!-- 보증서 유무 -->
+          <div class="warranty_status">
+            <h3 class="warranty_status_title normal_tb">보증서 유무</h3>
             <div class="warranty_status_checkbox">
               <input type="radio" name="warranty" value="yes" id="yes" checked>
               <label class="small_tr" for="yes"> 유</label>
@@ -187,31 +240,29 @@
               <input type="radio" name="warranty" value="no" id="no">
               <label class="small_tr" for="no"> 무</label>
             </div>
+          </div>
 
+          <!-- 자세한 설명 -->
+          <div class="product_description">
+            <h3 class="product_description_title normal_tb">자세한 설명</h3>
+            <textarea id="description" class="product_extra" name="description" rows="6"
+              placeholder="구매자가 알아야 할 정보를 입력해주세요.&#10;- 사용감(스크래치, 얼룩, 하자부분 등)&#10;- 사용기간(구매 시기 등)&#10;- 고장, 파손, 염색 등 하자 정보는 꼭 기재해주세요!"></textarea>
+          </div>
 
-            <!-- 자세한 설명 -->
-            <h3>자세한 설명</h3>
-            <div>
-              <textarea id="description" name="description" class="description-area" rows="6"
-                placeholder="구매자가 알아야 할 정보를 입력해주세요.&#10;- 사용감(스크래치, 얼룩, 하자부분 등)&#10;- 사용기간(구매 시기 등)&#10;- 고장, 파손, 염색 등 하자 정보는 꼭 기재해주세요!"></textarea>
-            </div>
-
-
-            <!-- 거래 방식 -->
-            <h3 class="trade_title">거래 방식</h3>
+          <!-- 거래 방식 -->
+          <div class="trade_status">
+            <h3 class="trade_title normal_tb">거래 방식</h3>
             <div class="trade_checkbox">
               <input type="checkbox" name="tradeMethod" value="delivery" id="delivery" checked>
               <label class="small_tr" for="delivery"> 택배</label>
-
               <input type="checkbox" name="tradeMethod" value="direct" id="direct">
               <label class="small_tr" for="direct">직거래</label>
             </div>
+          </div>
 
-
-            <!-- 태그(선택 사항) -->
-            <h3 class="product_tag_title">
-              태그(선택 사항) <span>최대 10개</span>
-            </h3>
+          <!-- 태그(선택 사항) -->
+          <div class="product_tag">
+            <h3 class="product_tag_title normal_tb">태그(선택 사항)<span class="xsmall_tr">최대 10개</span></h3>
             <div class="product_tag_content">
               <div class="product_tag_input">
                 <input type="text" id="tagInput" class="tag_input" placeholder="예시 '새상품', '미개봉'">
@@ -220,7 +271,7 @@
               <ul class="tag_list">
                 <li class="tag_item small_tr">
                   <span>새상품</span>
-                  <button>
+                  <button class="tag_delete_btn">
                     <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px"
                       fill="#939393">
                       <path
@@ -230,7 +281,7 @@
                 </li>
                 <li class="tag_item small_tr">
                   <span>미개봉</span>
-                  <button>
+                  <button class="tag_delete_btn">
                     <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px"
                       fill="#939393">
                       <path
@@ -240,7 +291,7 @@
                 </li>
                 <li class="tag_item small_tr">
                   <span>여름용</span>
-                  <button>
+                  <button class="tag_delete_btn">
                     <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px"
                       fill="#939393">
                       <path
@@ -250,10 +301,27 @@
                 </li>
               </ul>
             </div>
-            <button type="submit" class="submit_button">상품등록</button>
-          </form>
+          </div>
+
+          <button type="submit" class="submit_button">상품등록</button>
+        </form>
+
+      </div>
+      <!-- //form -->
+
+      <!-- common_caution_banner -->
+      <div class="caution_banner">
+        <img src="images/banner_icon.png" alt="banner_icon">
+        <div class="caution_desc">
+          <h3 class="medium_tb">잠시만요 !</h3>
+          <p class="normal_tb">안전하고 쾌적한 캠핑을 위한 사용법, 함께 확인해요.</p>
+          <a href="#" class="xsmall_tr">
+            거래 금지 품목 알아보기
+            <span><img src="images/banner_small_arrow.svg" alt="화살표"></span>
+          </a>
         </div>
       </div>
+      <!-- //common_caution_banner -->
     </main>
 
 

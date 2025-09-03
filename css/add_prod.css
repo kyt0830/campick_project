@@ -7,14 +7,24 @@
  * 수정이력:
  *  2025-09-02 : 최초 작성
 */
+main {
+    margin-bottom: var(--spacing-lg);
+}
 
 .form_content {
     padding: 0 15px;
-    box-sizing: border-box;
 }
 
-form div {
-    margin-bottom: var(--spacing-sm);
+.form_title {
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: var(--spacing-md);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
 }
 
 .image_upload {
@@ -35,35 +45,39 @@ form div {
 }
 
 .upload_img_count {
-    margin-top: -10px;
-}
-
-.product_title,
-.product_pirce {
-    position: relative;
-    margin-bottom: var(--spacing-sm);
-}
-
-.product_title label,
-.product_pirce label {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    /* font-size: 14px; */
-    /* font-weight: 400; */
+    margin-top: -8px;
     color: var(--font-color-placeholder);
 }
 
+.product_title {
+    margin-bottom: 0px;
+}
+
 .label_box {
-    display: block;
-    width: 600px;
+    width: 550px;
     height: 40px;
+    padding-left: 14px;
     background-color: #f3f3f3;
     border-radius: 5px;
     outline: 1px solid var(--border-color-basic);
     border: none;
+    color: var(--font-color-placeholder);
 }
+
+.category_btn,
+.brand_btn {
+    width: 120px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    outline: 1px solid var(--border-color-basic);
+    border: none;
+    color: var(--font-color-placeholder);
+}
+
 
 .product_status_checkbox,
 .warranty_status_checkbox,
@@ -100,7 +114,8 @@ form div {
     color: var(--font-color-white);
 }
 
-textarea {
+
+.product_extra {
     resize: none;
     width: 100%;
     height: 190px;
@@ -110,13 +125,33 @@ textarea {
     border: none;
     padding: var(--spacing-xs);
     box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.product_extra::-webkit-scrollbar {
+    width: 4px;
+}
+
+.product_extra::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.product_extra::-webkit-scrollbar-thumb {
+    background: var(--border-color-basic);
+    border-radius: 10px;
 }
 
 
 
+.product_tag {
+    margin-bottom: var(--spacing-sm);
+}
+
 .product_tag_input {
     display: flex;
     gap: var(--spacing-xs);
+    margin-bottom: 12px;
 }
 
 .tag_input {
@@ -144,6 +179,7 @@ textarea {
 
 .tag_item {
     display: flex;
+    gap: 5px;
     padding: 6px 12px;
     outline: 1px solid var(--border-color-basic);
     border-radius: 50px;
@@ -160,4 +196,14 @@ textarea {
     background-color: var(--btn-bg-color-basic);
     color: var(--font-color-white);
     border-radius: 5px;
+}
+
+h3[class $="normal_tb"] {
+    margin-bottom: var(--spacing-xs);
+}
+
+
+/* brand_popup */
+.brand_popup {
+    bottom: -52%;
 }
