@@ -1,0 +1,60 @@
+  /* 
+ * 파일명: footer.css
+ * 담당자: 김영태
+ * 작성일: 2025-08-29
+ * 최근 수정일: 2025-08-29
+ * 설명:  footer CSS 파일
+ * 수정이력:
+ *  2025-08-29: 최초 작성 및 footer 스타일 작성
+*/
+
+  footer {
+      max-width: 780px;
+      background-color: var(--bg-color-basic);
+      color: var(--font-color-white);
+      padding: 40px 14px 60px 14px;
+  }
+
+  .footer_logo {
+      margin-bottom: var(--spacing-sm);
+  }
+
+  .nav_links {
+      display: flex;
+      gap: 8px;
+      margin-bottom: var(--spacing-sm);
+  }
+
+  .footer_content {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: var(--spacing-sm);
+      border-bottom: 1px solid #4b4b4b;
+  }
+
+  .disclaimer_area {
+      margin-top: var(--spacing-sm);
+      display: flex;
+      justify-content: space-between;
+  }
+
+  .disclaimer {
+      max-width: 550px;
+      color: var(--font-color-white);
+  }
+
+  .footer_button_group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+  }
+
+  .footer_button {
+      width: 130px;
+      height: 40px;
+      color: var(--font-color-basic);
+      background: var(--bg-color-white);
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+  }

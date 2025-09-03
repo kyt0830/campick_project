@@ -1,24 +1,76 @@
 <!-- 
  * 파일명: login.html
- * 담당자: 미정
- * 작성일: 2025-08-28
- * 최근 수정일: 2025-08-28
+ * 담당자: 박연미
+ * 작성일: 2025-09-02
+ * 최근 수정일: 2025-09-02
  * 설명:  로그인 HTML 템플릿
  * 수정이력:
- *  2025-08-28: 최초 작성
+ *  2025-09-02: 최초 작성
 -->
 
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campick | 로그인</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campick | 로그인</title>
+  <link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/common.css">
+	<link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
+  <div class="container">
+    <div class="logo_section">
+      <div class="logo">
+        <img src="images/logo_black.png" alt="campick logo">
+      </div>
+      <div class="subtitle">
+        캠핑 <span class="font_primary">중고거래</span>는 캠픽<br>
+        캠핑 <span class="font_primary">트렌드</span>도 캠픽
+      </div>
+    </div>
 
+    <form>
+      <div class="form_group">
+        <label class="form_label">이메일</label>
+        <input type="email" class="form_input" placeholder="">
+      </div>
+
+      <div class="form_group">
+        <label class="form_label">비밀번호</label>
+        <input type="password" class="form_input" placeholder="">
+      </div>
+
+      <button type="submit" class="login_btn btn_normal">로그인</button>
+
+      <div class="links">
+        <a href="#">이메일 찾기</a>
+        <a href="#">비밀번호 찾기</a>
+      </div>
+
+      <div class="social_login">
+        <div class="login_title">
+          <div class="border"></div>
+          <span>간편 로그인</span>
+          <div class="border"></div>
+        </div>
+        <button type="button" class="social_btn naver_btn">
+          네이버로 로그인
+        </button>
+
+        <button type="button" class="social_btn kakao_btn">
+          카카오 로그인
+        </button>
+      </div>
+    </form>
+
+    <div class="signup_section">
+      <div class="border"></div>
+      <a href="/join_form.html">회원가입</a>
+    </div>
+  </div>
 </body>
 
 </html>

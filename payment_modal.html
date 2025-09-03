@@ -1,0 +1,54 @@
+<!-- 
+ * 파일명: payment_modal.html
+ * 담당자: 박연미
+ * 작성일: 2025-09-02
+ * 최근 수정일: 2025-09-02
+ * 설명: 주문완료 HTML 템플릿
+ * 수정이력:
+ *  2025-09-02: 최초 작성
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/payment_modal.css">
+  <title>Campick | 결제 모달</title>
+</head>
+
+<body>
+  <div class="overlay" onclick="closeModal()"></div>
+
+  <div class="modal">
+    <div class="modal_header">
+      <button class="close_button" onclick="closeModal()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#222222"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></button>
+
+      <div class="chat_icon">
+          <div class="chat-bubble"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#222222"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg></div>
+      </div>
+    </div>
+
+    <div class="modal_content">
+      <h2 class="modal_title">잠깐 판매자와 채팅 하셨나요?</h2>
+
+      <p class="modal_description">
+        제품을 하지 않고 결제하면 취소될 확률이 높아요.<br>
+        채팅을 통해 판매자와 소통해 보세요.
+      </p>
+
+      <div class="button_group">
+        <a href="" class="btn_normal primary_button">채팅하고 거래할래요.</a>
+        <a href="" class="secondary_button" >채팅없이 거래할래요.</a>
+        
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

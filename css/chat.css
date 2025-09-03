@@ -1,0 +1,199 @@
+/*
+ * 파일명: chat.css
+ * 담당자: 김영태
+ * 작성일: 2025-09-02
+ * 최근 수정일: 2025-09-02
+ * 설명:  채팅 스타일 시트
+ * 수정이력:
+ *  2025-09-02 : 최초 작성
+*/
+main {
+    margin-bottom: var(--spacing-lg);
+}
+
+.chat_content {
+    padding: 0 18px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.chat_header {
+    margin-bottom: var(--spacing-sm);
+}
+
+.chat_header_top {
+    position: relative;
+    margin-bottom: var(--spacing-sm);
+}
+
+.chat_title {
+    text-align: center;
+}
+
+.prev {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+}
+
+.chat_product_info {
+    display: flex;
+    gap: var(--spacing-sm);
+    position: relative;
+    margin-bottom: var(--spacing-sm);
+}
+
+.chat_thumbnail {
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.chat_thumbnail img {
+    width: 100%;
+    height: 100%;
+}
+
+.chat_meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    justify-content: center;
+    flex: 1;
+}
+
+.chat_product_price {
+    max-width: 550px;
+}
+
+.chat_button_group {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.chat_button_group button {
+    padding: 6px 12px;
+    outline: 1px solid #333;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chat_banner {
+    background: var(--primary);
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.chat_banner a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+    color: var(--font-color-white);
+}
+
+.chat_body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    height: 600px;
+    overflow-y: auto;
+}
+
+.chat_body::-webkit-scrollbar {
+    width: 4px;
+}
+
+.chat_body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.chat_body::-webkit-scrollbar-thumb {
+    background: var(--border-color-basic);
+    border-radius: 10px;
+    transition: background 0.2s ease;
+}
+
+.chat_date {
+    text-align: center;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    max-width: 40%;
+}
+
+.message_bubble {
+    padding: var(--spacing-xs);
+    word-break: break-word;
+    /* background-color: #d9d9d9; */
+    border-radius: 5px;
+    position: relative;
+}
+
+.message_time {
+    font-size: 10px;
+    color: #666;
+}
+
+.seller {
+    align-self: flex-start;
+}
+
+.seller .message_bubble {
+    background-color: #eee;
+}
+
+.seller .message_bubble::after {
+    content: '';
+    display: block;
+    border-width: 10px;
+    border-color: #eee transparent transparent transparent;
+    border-style: solid;
+    position: absolute;
+    top: 10px;
+    left: -9px;
+}
+
+.buyer {
+    align-self: flex-end;
+}
+
+.buyer .message_bubble {
+    background-color: #FFB2A4;
+}
+
+.buyer .message_bubble::after {
+    content: '';
+    display: block;
+    border-width: 10px;
+    border-color: #FFB2A4 transparent transparent transparent;
+    border-style: solid;
+    position: absolute;
+    top: 10px;
+    right: -9px;
+}
+
+.chat_input {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-xs);
+}
+
+.input_field {
+    flex: 1;
+    height: 50px;
+    outline: 1px solid var(--border-color-basic);
+    border-radius: 5px;
+    border: none;
+    padding-left: var(--spacing-xs)
+}

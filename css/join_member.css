@@ -1,0 +1,183 @@
+body {
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 80px 100px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.divider {
+  width: 100%;
+  height: 3px;
+  margin-bottom: 40px;
+  background-color: var(--bg-color-basic);
+}
+
+.section_title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 7px;
+  color: var(--primary);
+}
+
+.section_description {
+  font-size: 12px;
+  margin-bottom: 24px;
+}
+
+.form_group {
+  margin-bottom: 24px;
+}
+
+.form_label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.required {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.form_input {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #e9ecef;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form_input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.input_with_button {
+  display: flex;
+  gap: 8px;
+}
+
+.input_with_button .form_input {
+  flex: 1;
+}
+
+.verification_btn {
+  width: 120px;
+  height: 50px;
+  font-size: 14px;
+  line-height: 50px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.verification_btn.active {
+  background-color: var(--bg-color-basic);
+  color: var(--bg-color-white);
+}
+
+.terms_section {
+  padding-top: 24px;
+}
+
+.terms_item {
+  margin-bottom: 24px;
+}
+
+.checkbox_container {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--primary);
+}
+
+.checkbox_label {
+  font-size: 14px;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.all_agree {
+  font-weight: 600;
+  font-size: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e9ecef;
+  margin-bottom: 6px;
+}
+
+.terms_detail {
+  margin-top: 6px;
+}
+
+.terms_detail_item {
+  display: flex;
+  gap: 7px;
+  padding: 8px 0;
+  font-size: 14px;
+}
+
+.required_term {
+  color: var(--primary);
+}
+
+.signup_btn {
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 50px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+/* 실제 체크박스 숨기기 */
+.checkbox_input {
+  display: none;
+}
+
+/* checkbox */
+.checkbox_icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.checkbox_icon svg {
+  width: 100%;
+  height: 100%;
+  transition: fill 0.3s ease;
+}
+
+/* 기본 상태 (체크되지 않음) */
+.checkbox_input+.checkbox_icon svg {
+  fill: #d9d9d9;
+}
+
+/* 체크된 상태 */
+.checkbox_input:checked+.checkbox_icon svg {
+  fill: #ff6b35;
+  transform: scale(1.1);
+}

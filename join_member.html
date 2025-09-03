@@ -1,24 +1,144 @@
 <!-- 
  * 파일명: join_member.html
- * 담당자: 미정
- * 작성일: 2025-08-28
- * 최근 수정일: 2025-08-28
+ * 담당자: 박연미
+ * 작성일: 2025-09-02
+ * 최근 수정일: 2025-09-02
  * 설명: 회원가입 HTML 템플릿
  * 수정이력:
- *  2025-08-28: 최초 작성
+ *  2025-09-02: 최초 작성
 -->
 
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campick | 회원가입</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/join_member.css">
+  <title>Campick | 회원가입</title>
 </head>
 
 <body>
+  <div class="container">
+    <h1 class="title">회원가입</h1>
+    <div class="divider"></div>
 
+    <form>
+      <div class="section">
+        <h2 class="section_title">1. 정보입력</h2>
+        <p class="section_description">회원가입에 필요한 정보를 입력합니다.</p>
+
+        <div class="form_group">
+          <label class="form_label">이메일 <span class="required">*</span></label>
+          <input type="email" class="form_input" placeholder="">
+        </div>
+
+        <div class="form_group">
+          <label class="form_label">닉네임 <span class="required">*</span></label>
+          <input type="text" class="form_input" placeholder="">
+        </div>
+
+        <div class="form_group">
+          <label class="form_label">비밀번호 <span class="required">*</span></label>
+          <input type="password" class="form_input" placeholder="">
+        </div>
+
+        <div class="form_group">
+          <label class="form_label">비밀번호 확인 <span class="required">*</span></label>
+          <input type="password" class="form_input" placeholder="">
+        </div>
+
+        <div class="form_group">
+          <label class="form_label">휴대폰 번호 <span class="required">*</span></label>
+          <div class="input_with_button">
+            <input type="tel" class="form_input" placeholder="">
+            <button type="button" class="verification_btn btn_normal">인증번호 발송</button>
+          </div>
+        </div>
+
+        <div class="form_group">
+          <label class="form_label">인증번호 <span class="required">*</span></label>
+          <div class="input_with_button">
+            <input type="text" class="form_input" placeholder="">
+            <button type="button" class="verification_btn btn_normal">확인</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section terms_section">
+        <h2 class="section_title">2. 약관 동의</h2>
+        <p class="section_description">회원가입에 필요한 약관을 동의해 주세요.</p>
+        <div class="terms_item all_agree">
+          <div class="checkbox_container">
+            <input type="checkbox" class="checkbox" id="all_agree">
+            <label class="checkbox_label" for="all_agree">전체 동의하기</label>
+          </div>
+        </div>
+
+        <div class="terms_detail">
+
+          <div class="terms_detail_item">
+            <input type="checkbox" id="age-check" class="checkbox_input">
+            <label for="age-check" class="checkbox_icon">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" />
+              </svg>
+            </label>
+            <span class="required_term">[필수]</span>
+            <span>만 14세 이상입니다</span>
+          </div>
+
+          <div class="terms_detail_item">
+            <input type="checkbox" id="terms-check" class="checkbox_input">
+            <label for="terms-check" class="checkbox_icon">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" />
+              </svg>
+            </label>
+            <span class="required_term">[필수]</span>
+            <span>이용약관 동의</span>
+          </div>
+
+          <div class="terms_detail_item">
+            <input type="checkbox" id="privacy-check" class="checkbox_input">
+            <label for="privacy-check" class="checkbox_icon">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" />
+              </svg>
+            </label>
+            <span class="required_term">[필수]</span>
+            <span>개인 정보 수집 및 이용 동의</span>
+          </div>
+
+          <div class="terms_detail_item">
+            <input type="checkbox" id="privacy-optional" class="checkbox_input">
+            <label for="privacy-optional" class="checkbox_icon">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" />
+              </svg>
+            </label>
+            <span class="optional_term">[선택]</span>
+            <span>개인 정보 수집 및 이용 동의</span>
+          </div>
+
+          <div class="terms_detail_item">
+            <input type="checkbox" id="marketing-check" class="checkbox_input">
+            <label for="marketing-check" class="checkbox_icon">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+                <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" />
+              </svg>
+            </label>
+            <span class="optional_term">[선택]</span>
+            <span>광고성 정보 수신 모두 동의</span>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="signup_btn btn_normal">회원가입</button>
+    </form>
+  </div>
 </body>
 
 </html>

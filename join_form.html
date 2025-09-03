@@ -1,24 +1,56 @@
 <!-- 
  * 파일명: join_form.html
- * 담당자: 미정
- * 작성일: 2025-08-28
- * 최근 수정일: 2025-08-28
+ * 담당자: 박연미
+ * 작성일: 2025-09-02
+ * 최근 수정일: 2025-09-02
  * 설명: 회원가입 양식 HTML 템플릿
  * 수정이력:
- *  2025-08-28: 최초 작성
+ *  2025-09-02: 최초 작성
 -->
 
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campick | 회원가입</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campick | 회원가입</title>
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/join_form.css">
 </head>
 
 <body>
+  <div class="container">
+    <div class="logo">
+      <div class="flame_icon">
+        <div class="flame"><img src="images/logo_white 2.jpg" alt=""></div>
+      </div>
+      <h1 class="app_title">회원가입</h1>
+    </div>
 
+    <div class="signup_section">
+      <div class="general_signup">
+        <p class="section_title medium_tr ">일반 회원가입</p>
+        <a href="/join_member.html" class="signup_button btn_normal">이메일 회원가입</a>
+      </div>
+
+      <div class="social_signup">
+        <p class="section_title medium_tr">간편 회원가입</p>
+        <div class="social_buttons">
+          <button class="social_button kakao">
+            <img src="images/kakao_logo.png" alt="">
+          </button>
+          <button class="social_button naver">
+            <img src="images/naver_logo.png" alt="">
+          </button>
+          <button class="social_button google">
+            <img src="images/google_logo.png" alt="">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

@@ -1,0 +1,119 @@
+/*
+ * 파일명: messages.css
+ * 담당자: 김영태
+ * 작성일: 2025-09-02
+ * 최근 수정일: 2025-09-02
+ * 설명:  메시지 스타일 시트
+ * 수정이력:
+ *  2025-09-02 : 최초 작성
+*/
+
+main {
+    margin-bottom: var(--spacing-lg);
+}
+
+.tab_menu {
+    padding-left: 15px;
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-sm);
+}
+
+.tab_menu_title {
+    color: #939393;
+}
+
+.active {
+    font-weight: 700;
+    color: var(--font-color-basic);
+}
+
+.chat_list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.chat_item {
+    position: relative;
+}
+
+.chat_link {
+    display: flex;
+    gap: 36px;
+    align-items: center;
+}
+
+.chat_thumbnail {
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+.product_thumb {
+    width: 64px;
+    height: 64px;
+    border-radius: 5px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+
+.user_thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 48px;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+.chat_info {
+    flex: 1;
+    max-width: 550px;
+    position: relative;
+}
+
+.message {
+    background-color: #eee;
+}
+
+.message .chat_info::after {
+    content: '2';
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    background: #ff0000;
+    font-size: 10px;
+    line-height: 18px;
+    text-align: center;
+    color: var(--font-color-white);
+    border-radius: 10px;
+}
+
+.chat_userid {
+    margin-bottom: 7px;
+}
+
+.chat_message {
+    margin-bottom: var(--spacing-xs)
+}
+
+.chat_time {
+    color: #939393;
+}
+
+.chat_menu {
+    width: 24px;
+    height: 24px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 12px;
+    right: 24px;
+    background: var(--bg-color-white);
+}

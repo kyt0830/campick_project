@@ -1,0 +1,144 @@
+name: Project v2 Auto Status (User board, Classic PAT)
+
+
+on:
+  pull_request:
+    types: [opened, reopened, converted_to_draft, ready_for_review, closed]
+
+
+# This block controls only the default GITHUB_TOKEN. We actually use a Classic PAT secret below.
+permissions:
+  contents: read
+  pull-requests: read
+
+
+jobs:
+  project_v2_route:
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Set variables
+        id: vars
+        run: |
+          echo "OWNER=kyt0830" >> $GITHUB_OUTPUT            # GitHub username owning the Project v2 board
+          echo "PROJECT_NUMBER=1" >> $GITHUB_OUTPUT           # projects/<NUMBER> from the board URL
+          echo "STATUS_TODO=Todo" >> $GITHUB_OUTPUT
+          echo "STATUS_INPROGRESS=In Progress" >> $GITHUB_OUTPUT
+          echo "STATUS_DONE=Done" >> $GITHUB_OUTPUT
+
+
+      - name: Add PR to Project and update Status
+        # We use Classic PAT (scopes: repo, project) stored as repository secret PROJECTS_TOKEN
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PROJECT_TOKEN }}
+          script: |
+            const owner = "${{ steps.vars.outputs.OWNER }}";
+            const projectNumber = parseInt("${{ steps.vars.outputs.PROJECT_NUMBER }}", 10);
+
+
+            // 1) Look up the user-owned Project v2
+            const q = `
+              query($owner: String!, $projectNumber: Int!) {
+                user(login: $owner) {
+                  projectV2(number: $projectNumber) {
+                    id
+                    fields(first: 50) {
+                      nodes {
+                        ... on ProjectV2SingleSelectField {
+                          id
+                          name
+                          options { id name }
+                        }
+                      }
+                    }
+                  }
+                }
+              }`;
+
+
+            const data = await github.graphql(q, { owner, projectNumber });
+            const project = data.user?.projectV2;
+            if (!project) {
+              core.setFailed("Project v2 not found. Check OWNER/PROJECT_NUMBER and token scopes (need classic PAT with 'repo' and 'project').");
+              return;
+            }
+
+
+            const projectId = project.id;
+            const statusField = project.fields.nodes.find(f => f.name === "Status");
+            if (!statusField) core.setFailed("Status field not found on the Project board.");
+
+
+            const findOpt = (name) => {
+              const opt = statusField.options.find(o => o.name === name);
+              if (!opt) core.setFailed(`Status option not found: ${name}`);
+              return opt.id;
+            };
+
+
+            // 2) Current PR node id
+            const nodeId = context.payload.pull_request.node_id;
+
+
+            // 3) Ensure the PR exists as an item on the board
+            const addMu = `
+              mutation($projectId: ID!, $contentId: ID!) {
+                addProjectV2ItemById(input: { projectId: $projectId, contentId: $contentId }) {
+                  item { id }
+                }
+              }`;
+            const addRes = await github.graphql(addMu, { projectId, contentId: nodeId });
+            const itemId = addRes.addProjectV2ItemById.item.id;
+
+
+            // 4) Map event -> target Status
+            const S = {
+              TODO: "${{ steps.vars.outputs.STATUS_TODO }}",
+              INPROGRESS: "${{ steps.vars.outputs.STATUS_INPROGRESS }}",
+              DONE: "${{ steps.vars.outputs.STATUS_DONE }}",
+            };
+
+
+            let target = null;
+            const action = context.payload.action;
+
+
+            // Simple mapping:
+            // - opened/reopened/converted_to_draft → In Progress
+            // - ready_for_review → Todo
+            // - closed (merged) → Done ; closed (not merged) → Todo
+            if (["opened", "reopened", "converted_to_draft"].includes(action)) target = S.INPROGRESS;
+            if (action === "ready_for_review") target = S.TODO;
+            if (action === "closed") {
+              target = context.payload.pull_request.merged ? S.DONE : S.TODO;
+            }
+
+
+            if (!target) { core.info("No status change required for this event."); return; }
+
+
+            // 5) Update the Status field
+            const updateMu = `
+              mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optId: String!) {
+                updateProjectV2ItemFieldValue(input: {
+                  projectId: $projectId,
+                  itemId: $itemId,
+                  fieldId: $fieldId,
+                  value: { singleSelectOptionId: $optId }
+                }) {
+                  projectV2Item { id }
+                }
+              }`;
+
+
+            await github.graphql(updateMu, {
+              projectId,
+              itemId,
+              fieldId: statusField.id,
+              optId: findOpt(target)
+            });
+
+
+            core.info(`Status updated to '${target}'`);
