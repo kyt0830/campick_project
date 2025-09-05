@@ -1,0 +1,211 @@
+/*
+ * 파일명: page.module.css (add_prod.css)
+ * 담당자: 김영태
+  * 작성일: 2025-09-04
+ * 최근 수정일: 2025-09-04
+ * 설명: add_prod 스타일 시트
+ * 수정이력:
+ *  2025-09-04 : 기존 add_prod.css의 내용 첨부
+*/
+/* 
+main {
+    margin-bottom: var(--spacing-lg);
+} */
+
+.form_content {
+    padding: 0 15px;
+}
+
+.form_title {
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: var(--spacing-md);
+}
+
+.form_style {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.image_upload {
+    width: 96px;
+    height: 96px;
+    border-radius: 15px;
+    background-color: #f3f3f3;
+    outline: 1px solid var(--border-color-basic);
+}
+
+.upload_box {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.upload_img_count {
+    margin-top: -8px;
+    color: var(--font-color-placeholder);
+}
+
+.product_title {
+    margin-bottom: 0px;
+}
+
+.label_box {
+    width: 550px;
+    height: 40px;
+    padding-left: 14px;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    outline: 1px solid var(--border-color-basic);
+    border: none;
+    color: var(--font-color-placeholder);
+}
+
+.category_btn,
+.brand_btn {
+    width: 120px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    outline: 1px solid var(--border-color-basic);
+    border: none;
+    color: var(--font-color-placeholder);
+}
+
+
+.product_status_checkbox,
+.warranty_status_checkbox,
+.trade_checkbox {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.product_status_checkbox label,
+.warranty_status_checkbox label,
+.trade_checkbox label {
+    width: 120px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    outline: 1px solid var(--border-color-basic);
+    border: none;
+    color: var(--font-color-placeholder);
+}
+
+.product_status_checkbox input[type="radio"],
+.warranty_status_checkbox input[type="radio"],
+.trade_checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.product_status_checkbox input[type="radio"]:checked+label,
+.warranty_status_checkbox input[type="radio"]:checked+label,
+.trade_checkbox input[type="checkbox"]:checked+label {
+    background-color: var(--btn-bg-color-basic);
+    color: var(--font-color-white);
+}
+
+
+.product_extra {
+    resize: none;
+    width: 100%;
+    height: 190px;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    outline: 1px solid var(--border-color-basic);
+    border: none;
+    padding: var(--spacing-xs);
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.product_extra::-webkit-scrollbar {
+    width: 4px;
+}
+
+.product_extra::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.product_extra::-webkit-scrollbar-thumb {
+    background: var(--border-color-basic);
+    border-radius: 10px;
+}
+
+
+
+.product_tag {
+    margin-bottom: var(--spacing-sm);
+}
+
+.product_tag_input {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-bottom: 12px;
+}
+
+.tag_input {
+    flex: 1;
+    height: 40px;
+    background-color: #f3f3f3;
+    outline: 1px solid var(--border-color-basic);
+    color: var(--font-color-placeholder);
+    border: none;
+    border-radius: 5px;
+    padding-left: 14px;
+}
+
+.tag_add_btn {
+    width: 115px;
+    height: 40px;
+    outline: 1px solid var(--border-color-basic);
+    border-radius: 5px;
+}
+
+.tag_list {
+    display: flex;
+    gap: var(--spacing-xs);
+}
+
+.tag_item {
+    display: flex;
+    gap: 5px;
+    padding: 6px 12px;
+    outline: 1px solid var(--border-color-basic);
+    border-radius: 50px;
+}
+
+.tag_item button {
+    display: flex;
+    align-items: center;
+}
+
+.submit_button {
+    width: 100%;
+    height: 40px;
+    background-color: var(--btn-bg-color-basic);
+    color: var(--font-color-white);
+    border-radius: 5px;
+}
+
+
+.title {
+    margin-bottom: var(--spacing-xs);
+
+}
+
+/* brand_popup */
+.brand_popup {
+    bottom: -52%;
+}

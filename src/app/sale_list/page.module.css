@@ -1,0 +1,83 @@
+.tab_menu{
+  display: flex;
+  gap: var(--spacing-xs);
+  margin: 0 0 var(--spacing-sm) 18px;
+}
+
+.tab_menu a {
+  font-weight: 700;
+  color: var(--font-color-placeholder);
+}
+
+.tab_menu a.active {
+  color: var(--font-color-basic);
+}
+
+/* product_list 2col ver  */
+.product_list_wrapper_2col {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 18px;
+}
+
+.product_card_2col {
+  width: calc(50% - 10px);
+  position: relative;
+  background: white;
+  cursor: pointer;
+}
+
+.soldout_list_wrapper {
+  display: flex;
+  position: relative;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 18px;
+}
+
+.product_list_wrapper_2col.hidden {
+  display: none;
+}
+
+.soldout_badge {
+  position: absolute;
+  top: var(--spacing-xs);
+  left: var(--spacing-xs);
+  padding: 6px 12px;
+  font-size: 12px;
+  background-color: var(--primary);
+  color: var(--font-color-white);
+  filter: none;
+  border-radius: 15px;
+  z-index: 1;
+}
+
+.product_card_2col.disable .product_image img {
+  filter: grayscale(80%);
+}
+
+.product_card_2col.disable :global(.product_stats) img {
+  opacity: 0.6;
+}
+
+.product_card_2col.disable :global(.product_title),
+.product_card_2col.disable :global(.product_meta),
+.product_card_2col.disable :global(.product_price),
+.product_card_2col.disable :global(.product_stats) {
+  color: var(--font-color-light-gray);
+}
+
+.more_btn {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: var(--spacing-xs);
+  right: var(--spacing-xs);
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
