@@ -1,0 +1,32 @@
+.mypage{
+  padding: 0 18px;
+}
+.mypage>div{
+  margin-bottom: var(--spacing-sm);
+}
+.mypage h2{
+  margin-bottom: var(--spacing-xs);
+  padding-left: 8px;
+  font-size: 18px;
+  font-weight: 700;
+}
+.mypage ul{
+  display: flex;
+  max-width: 100%;
+  gap: 96px;
+  padding: 30px;
+  background: rgba(243, 243, 243, 0.4);
+}
+.mypage ul li a{
+  display: flex;
+  flex-direction: column;
+}
+
+.mypage ul li img{
+  margin: 0 auto;
+  margin-bottom: var(--spacing-xs);
+}
+
+.mypage ul li span{
+  font-size: 14px;
+}

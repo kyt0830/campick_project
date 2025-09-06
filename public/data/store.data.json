@@ -1,0 +1,462 @@
+[
+  {
+    "product_image": {
+      "src": "images/product_img01.jpg",
+      "alt": "[힐레베르그] 알락 2 텐트 (Allak 2)"
+    },
+    "product_info": {
+      "title": "[힐레베르그] 알락 2 텐트 (Allak 2)",
+      "meta": {
+        "location": "종로1.2.3.4가동",
+        "date": "4시간 전"
+      },
+      "category": "텐트/타프",
+      "brand": "힐레베르그",
+      "footer": {
+        "price": "1,893,000 원",
+        "stats": [
+          {"type": "view", "count": 12, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 1, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 0, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img02.jpg",
+      "alt": "[힐레베르그] 나마츠 2 텐트 (Nammatj 2)"
+    },
+    "product_info": {
+      "title": "[힐레베르그] 나마츠 2 텐트 (Nammatj 2)",
+      "meta": {
+        "location": "평창군",
+        "date": "7시간 전"
+      },
+      "category": "텐트/타프",
+      "brand": "힐레베르그",
+      "footer": {
+        "price": "1,240,000 원",
+        "stats": [
+          {"type": "view", "count": 15, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 3, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 2, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img03.jpg",
+      "alt": "[힐레베르그] 나마츠 2GT 텐트 (Nammatj 2GT)"
+    },
+    "product_info": {
+      "title": "[힐레베르그] 나마츠 2GT 텐트 (Nammatj 2GT)",
+      "meta": {
+        "location": "상상2동",
+        "date": "1일 전"
+      },
+      "category": "텐트/타프",
+      "brand": "힐레베르그",
+      "footer": {
+        "price": "1,300,000 원",
+        "stats": [
+          {"type": "view", "count": 8, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 0, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 1, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img04.jpg",
+      "alt": "[힐레베르그] 에난 텐트 (Enan)"
+    },
+    "product_info": {
+      "title": "[힐레베르그] 에난 텐트 (Enan)",
+      "meta": {
+        "location": "언남동",
+        "date": "2일 전"
+      },
+      "category": "텐트/타프",
+      "brand": "힐레베르그",
+      "footer": {
+        "price": "840,000 원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img05.jpg",
+      "alt": "[힐레베르그] 알락 3 텐트 (Allak 3)"
+    },
+    "product_info": {
+      "title": "[힐레베르그] 알락 3 텐트 (Allak 3)",
+      "meta": {
+        "location": "중계2.3동",
+        "date": "11시간 전"
+      },
+      "category": "텐트/타프",
+      "brand": "힐레베르그",
+      "footer": {
+        "price": "950,000 원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img06.jpg",
+      "alt": "[힐레베르그] 헬라그스 2 텐트 (Helags 2)"
+    },
+    "product_info": {
+      "title": "[힐레베르그] 헬라그스 2 텐트 (Helags 2)",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "텐트/타프",
+      "brand": "힐레베르그",
+      "footer": {
+        "price": "1,460,000 원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img07.jpg",
+      "alt": "몽벨 문라이트 텐트 2 카모플라주 플라이 그린"
+    },
+    "product_info": {
+      "title": "몽벨 문라이트 텐트 2 카모플라주 플라이 그린",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "텐트/타프",
+      "brand": "몽벨",
+      "footer": {
+        "price": "199,200원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img08.jpg",
+      "alt": "헬리녹스 x 네이버후드 선쉐이드 올리브 드랩 "
+    },
+    "product_info": {
+      "title": "헬리녹스 x 네이버후드 선쉐이드 올리브 드랩 ",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "텐트/타프",
+      "brand": "헬리녹스",
+      "footer": {
+        "price": "593,000원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img09.jpg",
+      "alt": "헬리녹스 노나돔 4.0 블랙"
+    },
+    "product_info": {
+      "title": "헬리녹스 노나돔 4.0 블랙",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "텐트/타프",
+      "brand": "헬리녹스",
+      "footer": {
+        "price": "2,670,000원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img10.jpg",
+      "alt": "헬리녹스 택티컬 코트 텐트 솔로 이너 텐트"
+    },
+    "product_info": {
+      "title": "헬리녹스 택티컬 코트 텐트 솔로 이너 텐트",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "텐트/타프",
+      "brand": "헬리녹스",
+      "footer": {
+        "price": "372,000원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img11.jpg",
+      "alt": "노르디스크 아스가르드 7.1 텐트 내츄럴"
+    },
+    "product_info": {
+      "title": "노르디스크 아스가르드 7.1 텐트 내츄럴",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "텐트/타프",
+      "brand": "노르디스크",
+      "footer": {
+        "price": "450,000원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img12.jpg",
+      "alt": "스노우피크 타프 익스텐션 텐트 4"
+    },
+    "product_info": {
+      "title": "스노우피크 타프 익스텐션 텐트 4",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "텐트/타프",
+      "brand": "스노우피크",
+      "footer": {
+        "price": "700,000원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img13.jpg",
+      "alt": "헬리녹스 택티컬 체어 원 밀리터리 올리브"
+    },
+    "product_info": {
+      "title": "헬리녹스 택티컬 체어 원 밀리터리 올리브",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "체어/테이블",
+      "brand": "헬리녹스",
+      "footer": {
+        "price": "125,000원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img14.jpg",
+      "alt": "헬리녹스 체어 제로 블랙"
+    },
+    "product_info": {
+      "title": "헬리녹스 체어 제로 블랙",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "체어/테이블",
+      "brand": "헬리녹스",
+      "footer": {
+        "price": "137,000원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img15.jpg",
+      "alt": "몽벨 베이스 캠프 체어 잉크 블루"
+    },
+    "product_info": {
+      "title": "몽벨 베이스 캠프 체어 잉크 블루",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "체어/테이블",
+      "brand": "몽벨",
+      "footer": {
+        "price": "78,400원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img16.jpg",
+      "alt": "몽벨 베이스 캠프 체어 베이지"
+    },
+    "product_info": {
+      "title": "몽벨 베이스 캠프 체어 베이지",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "체어/테이블",
+      "brand": "몽벨",
+      "footer": {
+        "price": "78,400원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img17.jpg",
+      "alt": "헬리녹스 x 르망 클래식 스피드 스툴 M 그린"
+    },
+    "product_info": {
+      "title": "헬리녹스 x 르망 클래식 스피드 스툴 M 그린",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "체어/테이블",
+      "brand": "헬리녹스",
+      "footer": {
+        "price": "160,000원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img18.jpg",
+      "alt": "몽벨 멀티 폴딩 와이드 테이블 보드 브라운"
+    },
+    "product_info": {
+      "title": "몽벨 멀티 폴딩 와이드 테이블 보드 브라운",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "체어/테이블",
+      "brand": "몽벨",
+      "footer": {
+        "price": "55,200원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img19.jpg",
+      "alt": "몽벨 멀티 폴딩 테이블 브라운"
+    },
+    "product_info": {
+      "title": "몽벨 멀티 폴딩 테이블 브라운",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "체어/테이블",
+      "brand": "몽벨",
+      "footer": {
+        "price": "167,200원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  },
+  {
+    "product_image": {
+      "src": "images/product_img20.jpg",
+      "alt": "스노우피크 엔트리 IGT"
+    },
+    "product_info": {
+      "title": "스노우피크 엔트리 IGT",
+      "meta": {
+        "location": "하계2동",
+        "date": "6일 전"
+      },
+      "category": "체어/테이블",
+      "brand": "스노우피크",
+      "footer": {
+        "price": "278,000원",
+        "stats": [
+          {"type": "view", "count": 65, "label": "조회수", "icon": "images/prod_detail_view.svg"},
+          {"type": "message", "count": 5, "label": "메세지", "icon": "images/prod_detail_chat.svg"},
+          {"type": "like", "count": 48, "label": "즐겨찾기", "icon": "images/prod_detail_bookmark.svg"}
+        ]
+      }
+    }
+  }
+]
