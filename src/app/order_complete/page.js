@@ -63,14 +63,14 @@ export default function OrderComplete() {
 							<span>상품금액</span>
 							<span>100,000 원</span>
 						</div>
-						<div className={`${styles.summary_row} small_tr`}>
+						<div className={`${styles.summary_row } small_tr`}>
 							<span>배송비</span>
 							<span>+ 4000 원</span>
 						</div>
 						<div className={`${styles.summary_row} total small_tr`}
 						>
-							<span>결제금액</span>
-							<span>104,000 원</span>
+							<span className="small_tb">결제금액</span>
+							<span className="small_tb">104,000 원</span>
 						</div>
 						<div className={styles.payment_method}>
 							<span className={styles.payment_method_label}>결제수단</span>

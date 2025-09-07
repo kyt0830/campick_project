@@ -279,3 +279,6 @@ body {
 		flex-direction: row;
 		margin-bottom: 80px;
 	}
+	.line_top{
+		border-top: 1px solid var(--border-color-basic);
+	}
