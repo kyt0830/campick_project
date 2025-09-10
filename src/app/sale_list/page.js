@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { createClient } from "@supabase/supabase-js";
 
 import styles from "./page.module.css";
+import Head from "next/head";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -247,185 +248,190 @@ export default function Salelist() {
   }
 
   return (
-    <div className="salelist_page">
-      <div className="user_profile_wrapper">
-        <div className="profile_card">
-          <div className="profile_img_wrapper">
-            <Image src="/images/user_profile_img.jpg" width={72} height={72} alt="사용자 프로필" />
-          </div>
-          <div className="user_info">
-            <h2 id="user_id">User_ID</h2>
-            <ul className="stats_wrapper">
-              <li className="stat_item">
-                <h4 className="stat_title">게시글</h4>
-                <p className="stat_number">{products.length}</p>
-              </li>
-              <li className="stat_item">
-                <h4 className="stat_title">팔로워</h4>
-                <p className="stat_number">500</p>
-              </li>
-              <li className="stat_item">
-                <h4 className="stat_title">팔로잉</h4>
-                <p className="stat_number">234</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="point_card">
-          <h3 className="point_title">캠픽페이</h3>
-          <p className="point_value">5,000,000 원</p>
-          <div className="button_group">
-            <button className="point_btn">충전</button>
-            <button className="point_btn">이체</button>
-          </div>
-        </div>
-      </div>
-
-      <div className={styles.tab_menu}>
-        <Link 
-          href="#" 
-          className={activeTab === 'selling' ? styles.active : ''} 
-          onClick={(e) => {
-            e.preventDefault();
-            handleTabClick('selling');
-          }}>
-          판매중
-        </Link>
-        <Link 
-          href="#" 
-          className={activeTab === 'soldout' ? styles.active : ''} 
-          onClick={(e) => {
-            e.preventDefault();
-            handleTabClick('soldout');
-          }}>
-          판매완료
-        </Link>
-      </div>
-
-      <ul
-        className={
-          displayProducts.length === 0
-            ? styles.no_result_wrapper
-            : styles.product_list_wrapper_2col
-        }
-      >
-        {displayProducts.length === 0 && activeTab === 'soldout' ? (
-          <li className={styles.no_result}>
-            <Image
-              src="/images/store_logo_small.svg"
-              alt="검색 결과 없음"
-              width={35}
-              height={54}
-            />
-            <p className="small_tb">판매 완료된 상품이 없습니다.</p>
-          </li>
-        ) : displayProducts.length === 0 ? (
-          <li className={styles.no_result}>
-            <Image
-              src="/images/store_logo_small.svg"
-              alt="검색 결과 없음"
-              width={35}
-              height={54}
-            />
-            <p className="small_tb">등록된 상품이 없습니다.</p>
-          </li>
-        ) : (
-          displayProducts.map((product) => (
-            <li 
-              key={product.id} 
-              className={`${styles.product_card_2col} ${product.isSoldout ? styles.disable : ''}`}
-            >
-              <Link href={`/prod_detail/${product.id}`}>
-                {product.isSoldout && 
-                <div className={styles.soldout_badge}>판매 완료</div>}
-                <div className={styles.product_image}>
-                  <Image 
-                    src={product.image.split(",")[0]} 
-                    width={357} 
-                    height={357}
-                    alt={product.title}
-                  />
-                </div>
-                <div className="product_info">
-                  <h3 className="product_title small_tr">{product.title}</h3>
-                  <div className="product_meta">
-                    <span className="product_location">{product.location}</span>
-                    <span className="product_date">{product.date}</span>
-                  </div>
-                  <div className="product_footer">
-                    <span className="product_price normal_tb">{product.price}</span>
-                    <ul className="product_stats">
-                      <li className="view">
-                        <p className="icon">
-                          <Image src="/images/prod_detail_view.svg" width={14} height={14} alt="조회수" />
-                        </p>
-                        <span>{product.views}</span>
-                      </li>
-                      <li className="message">
-                        <p className="icon">
-                          <Image src="/images/prod_detail_chat.svg" width={12} height={12} alt="메세지" />
-                        </p>
-                        <span>{product.messages}</span>
-                      </li>
-                      <li className="like">
-                        <p className="icon">
-                          <Image src="/images/prod_detail_bookmark.svg" width={14} height={14} alt="즐겨찾기" />
-                        </p>
-                        <span>{product.likes}</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </Link>
-              
-              {/* 더보기 버튼 */}
-              <button 
-                className={styles.more_btn}
-                onClick={() => handleMoreClick(product)}
-              >
-                ⋯
-              </button>
-            </li>
-          ))
-        )}
-      </ul>
-      
-      {(popupState !== 'hidden') && (
-        <>
-          <div className="overlay active" onClick={closePopup}></div>
-          
-          <div className={`more_popup ${popupState === 'active' ? 'active' : ''}`}>
-            <ul>
-              {selectedProduct && !selectedProduct.isSoldout ? (
-                <>
-                  <li>
-                    <button className="modify_btn small_tb" onClick={handleEdit}>
-                      수정
-                    </button>
-                  </li>
-                  <li>
-                    <button className="delete_btn small_tb" onClick={handleDelete}>
-                      삭제
-                    </button>
-                  </li>
-                  <li>
-                    <button className="soldout_btn small_tb" onClick={handleSoldout}>
-                      판매완료
-                    </button>
-                  </li>
-                </>
-              ) : selectedProduct && (
-                <li>
-                  <button className="resale_btn small_tb" onClick={handleResale}>
-                    재판매
-                  </button>
+    <>
+      <Head>
+        <title>Campick - 판매목록</title>
+      </Head>
+      <div className="salelist_page">
+        <div className="user_profile_wrapper">
+          <div className="profile_card">
+            <div className="profile_img_wrapper">
+              <Image src="/images/user_profile_img.jpg" width={72} height={72} alt="사용자 프로필" />
+            </div>
+            <div className="user_info">
+              <h2 id="user_id">User_ID</h2>
+              <ul className="stats_wrapper">
+                <li className="stat_item">
+                  <h4 className="stat_title">게시글</h4>
+                  <p className="stat_number">{products.length}</p>
                 </li>
-              )}
-            </ul>
+                <li className="stat_item">
+                  <h4 className="stat_title">팔로워</h4>
+                  <p className="stat_number">500</p>
+                </li>
+                <li className="stat_item">
+                  <h4 className="stat_title">팔로잉</h4>
+                  <p className="stat_number">234</p>
+                </li>
+              </ul>
+            </div>
           </div>
-        </>
-      )}
-    </div>
+
+          <div className="point_card">
+            <h3 className="point_title">캠픽페이</h3>
+            <p className="point_value">5,000,000 원</p>
+            <div className="button_group">
+              <button className="point_btn">충전</button>
+              <button className="point_btn">이체</button>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.tab_menu}>
+          <Link 
+            href="#" 
+            className={activeTab === 'selling' ? styles.active : ''} 
+            onClick={(e) => {
+              e.preventDefault();
+              handleTabClick('selling');
+            }}>
+            판매중
+          </Link>
+          <Link 
+            href="#" 
+            className={activeTab === 'soldout' ? styles.active : ''} 
+            onClick={(e) => {
+              e.preventDefault();
+              handleTabClick('soldout');
+            }}>
+            판매완료
+          </Link>
+        </div>
+
+        <ul
+          className={
+            displayProducts.length === 0
+              ? styles.no_result_wrapper
+              : styles.product_list_wrapper_2col
+          }
+        >
+          {displayProducts.length === 0 && activeTab === 'soldout' ? (
+            <li className={styles.no_result}>
+              <Image
+                src="/images/store_logo_small.svg"
+                alt="검색 결과 없음"
+                width={35}
+                height={54}
+              />
+              <p className="small_tb">판매 완료된 상품이 없습니다.</p>
+            </li>
+          ) : displayProducts.length === 0 ? (
+            <li className={styles.no_result}>
+              <Image
+                src="/images/store_logo_small.svg"
+                alt="검색 결과 없음"
+                width={35}
+                height={54}
+              />
+              <p className="small_tb">등록된 상품이 없습니다.</p>
+            </li>
+          ) : (
+            displayProducts.map((product) => (
+              <li 
+                key={product.id} 
+                className={`${styles.product_card_2col} ${product.isSoldout ? styles.disable : ''}`}
+              >
+                <Link href={`/prod_detail/${product.id}`}>
+                  {product.isSoldout && 
+                  <div className={styles.soldout_badge}>판매 완료</div>}
+                  <div className={styles.product_image}>
+                    <Image 
+                      src={product.image.split(",")[0]} 
+                      width={357} 
+                      height={357}
+                      alt={product.title}
+                    />
+                  </div>
+                  <div className="product_info">
+                    <h3 className="product_title small_tr">{product.title}</h3>
+                    <div className="product_meta">
+                      <span className="product_location">{product.location}</span>
+                      <span className="product_date">{product.date}</span>
+                    </div>
+                    <div className="product_footer">
+                      <span className="product_price normal_tb">{product.price}</span>
+                      <ul className="product_stats">
+                        <li className="view">
+                          <p className="icon">
+                            <Image src="/images/prod_detail_view.svg" width={14} height={14} alt="조회수" />
+                          </p>
+                          <span>{product.views}</span>
+                        </li>
+                        <li className="message">
+                          <p className="icon">
+                            <Image src="/images/prod_detail_chat.svg" width={12} height={12} alt="메세지" />
+                          </p>
+                          <span>{product.messages}</span>
+                        </li>
+                        <li className="like">
+                          <p className="icon">
+                            <Image src="/images/prod_detail_bookmark.svg" width={14} height={14} alt="즐겨찾기" />
+                          </p>
+                          <span>{product.likes}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </Link>
+                
+                {/* 더보기 버튼 */}
+                <button 
+                  className={styles.more_btn}
+                  onClick={() => handleMoreClick(product)}
+                >
+                  ⋯
+                </button>
+              </li>
+            ))
+          )}
+        </ul>
+        
+        {(popupState !== 'hidden') && (
+          <>
+            <div className="overlay active" onClick={closePopup}></div>
+            
+            <div className={`more_popup ${popupState === 'active' ? 'active' : ''}`}>
+              <ul>
+                {selectedProduct && !selectedProduct.isSoldout ? (
+                  <>
+                    <li>
+                      <button className="modify_btn small_tb" onClick={handleEdit}>
+                        수정
+                      </button>
+                    </li>
+                    <li>
+                      <button className="delete_btn small_tb" onClick={handleDelete}>
+                        삭제
+                      </button>
+                    </li>
+                    <li>
+                      <button className="soldout_btn small_tb" onClick={handleSoldout}>
+                        판매완료
+                      </button>
+                    </li>
+                  </>
+                ) : selectedProduct && (
+                  <li>
+                    <button className="resale_btn small_tb" onClick={handleResale}>
+                      재판매
+                    </button>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 }

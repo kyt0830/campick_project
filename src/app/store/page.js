@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@supabase/supabase-js";
+import Head from 'next/head';
 import styles from "./page.module.css";
 
 // 환경 변수 검증
@@ -231,6 +232,9 @@ const mapped = data.map((p) => {
 
   return (
     <>
+      <Head>
+        <title>Campick - 스토어</title>
+      </Head>
       <div className={styles.store_category}>
         <h3 className="medium_tb">캠핑</h3>
         <nav className={styles.category_menu}>

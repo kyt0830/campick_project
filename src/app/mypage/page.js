@@ -3,8 +3,7 @@ import Link from 'next/link'
 import styles from "./page.module.css";
 
 export const metadata = {
-  title: "Campick - 마이페이지",
-  description: "Welcome to Campick",
+  title: "Campick - 마이페이지"
 };
 
 export default function Mypage() {

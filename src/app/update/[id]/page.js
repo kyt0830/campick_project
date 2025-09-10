@@ -5,6 +5,7 @@ import { useRouter, useParams } from 'next/navigation';
 import { createClient } from "@supabase/supabase-js";
 import Image from 'next/image';
 import styles from '../../addprod/page.module.css';
+import Head from 'next/head';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -296,6 +297,9 @@ export default function ProductUpdate() {
 
   return (
     <>
+      <Head>
+        <title>Campick - 상품 수정</title>
+      </Head>
       {/* form  */}
       <div className={styles.form_content}>
         <h2 className={styles.form_title}>상품 수정하기</h2>

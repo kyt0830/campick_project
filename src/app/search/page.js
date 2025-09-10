@@ -9,8 +9,7 @@
 */
 
 export const metadata = {
-  title: "Campick - 조회",
-  description: "Welcome to Campick",
+  title: "Campick - 조회"
 };
 
 import Image from "next/image";
@@ -21,6 +20,7 @@ import styles from "./page.module.css"
 export default function Search() {
   return (
     <>
+     {/* 
       <div className={styles.container}>
         <div className={styles.header}>
           <a href="" className={styles.back_button}>
@@ -53,7 +53,7 @@ export default function Search() {
             />
           </div>
         </div>
-
+      */}
         <div className={styles.search_section}>
           <div className={styles.recent_searches}>
             <div className={styles.section_header}>
@@ -82,8 +82,8 @@ export default function Search() {
                   />
                 </span>
               </div>
-              <div className={styles.search_tag}>
-                힐레베르그 알락
+              <Link href="/store" className={styles.search_tag}>
+                텐트
                 <span className={styles.tag_remove}>
                   <Image
                     src="/images/tag_remove.svg"
@@ -92,7 +92,7 @@ export default function Search() {
                     height={20}
                   />
                 </span>
-              </div>
+              </Link>
               <div className={styles.search_tag}>
                 니모 아톰 2p
                 <span className={styles.tag_remove}>
@@ -191,7 +191,7 @@ export default function Search() {
             </ul>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }

@@ -1,47 +1,45 @@
 
-'use client';
 import Image from "next/image";
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import AddProductButton from "./components/AddProductbtn";
 import "./css/reset.css";
 import './globals.css'
-// import "./css/common.css";
 import "./css/header.css";
 import "./css/footer.css";
 
-
-/* 폰트 설정 예시
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-*/
-
-// export const metadata = {
-//   title: "Campick",
-//   description: "Welcome to Campick",
-// };
+export const metadata = {
+  title: "Campick",
+  description: "캠핑 용품 중고거래, 브랜드 정보, 캠핑 커뮤니티까지 한번에!",
+  icons: {
+    icon: [
+      { url: "/favicon/favicon.ico" },
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon/android-icon-192x192.png", sizes: "192x192", type: "image/png" }
+    ],
+  },
+  apple: [
+    { url: "/favicon/apple-icon-57x57.png", sizes: "57x57" },
+    { url: "/favicon/apple-icon-60x60.png", sizes: "60x60" },
+    { url: "/favicon/apple-icon-72x72.png", sizes: "72x72" },
+    { url: "/favicon/apple-icon-76x76.png", sizes: "76x76" },
+    { url: "/favicon/apple-icon-114x114.png", sizes: "114x114" },
+    { url: "/favicon/apple-icon-120x120.png", sizes: "120x120" },
+    { url: "/favicon/apple-icon-144x144.png", sizes: "144x144" },
+    { url: "/favicon/apple-icon-152x152.png", sizes: "152x152" },
+    { url: "/favicon/apple-icon-180x180.png", sizes: "180x180" },
+    { url: "/favicon/apple-touch-icon.png" }
+  ],
+  manifest: "/favicon/manifest.json"
+}
 
 export default function RootLayout({ children }) {
-  const pathname = usePathname();
   return (
     <html lang="ko">
       <body>
         <div className="container">
-          {/* 상품등록 버튼 */}
-          {pathname !== '/addprod' && (
-            <div className='btn_group'>
-              <Link className="addprod_btn small_tr" href="/addprod">
-                상품등록 +
-              </Link>
-            </div>
-          )}
-          {/* //상품등록 버튼 */}
+        <AddProductButton />
           <header>
             <div className="header_top">
               <h1 className="logo">
@@ -55,10 +53,10 @@ export default function RootLayout({ children }) {
                   <span className="ir_pm">campick</span>
                 </Link>
               </h1>
-              <div className="search_area">
+              <Link href="/search" className="search_area">
                 <input type="text" placeholder="어떤 캠핑 정보를 찾으시나요?" />
                 <button type="button"></button>
-              </div>
+              </Link>
               <nav className="user_menu">
                 <ul>
                   <li>
