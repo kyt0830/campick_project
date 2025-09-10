@@ -60,6 +60,7 @@
 
 .brand_header {
   display: flex;
+  min-height: 30px;
   align-items: center;
   gap: 8px;
 }
