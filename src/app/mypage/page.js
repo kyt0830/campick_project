@@ -16,10 +16,10 @@ export default async function Mypage() {
       <div className="user_profile_wrapper">
         <div className="profile_card">
           <div className="profile_img_wrapper">
-            <Image src="/images/user_profile_img.jpg" alt="사용자 프로필" width={72} height={72} />
+            <Image src="/images/profile_default_img.svg" alt="사용자 프로필" width={72} height={72} />
           </div>
           <div className="user_info">
-            <h2 id="user_id">{user?.user_metadata.nickname || ("로그인해주세요")}</h2>
+            <h2 id="user_id">{user?.user_metadata.nickname || ("로그인 해주세요")}</h2>
             <ul className="stats_wrapper">
               <li className="stat_item">
                 <h4 className="stat_title">게시글</h4>
