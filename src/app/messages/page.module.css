@@ -23,9 +23,9 @@
     color: #939393;
 }
 
-.active {
+.active{
     font-weight: 700;
-    color: var(--font-color-basic);
+    color: #333;
 }
 
 .chat_list {

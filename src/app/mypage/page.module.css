@@ -7,7 +7,6 @@
 .mypage h2{
   margin-bottom: var(--spacing-xs);
   padding-left: 8px;
-  font-size: 18px;
   font-weight: 700;
 }
 .mypage ul{
@@ -16,7 +15,11 @@
   gap: 96px;
   padding: 30px;
   background: rgba(243, 243, 243, 0.4);
+  box-shadow: 
+  0 1px 3px rgba(0, 0, 0, 0.06),
+  0 2px 6px rgba(0, 0, 0, 0.04);
 }
+
 .mypage ul li a{
   display: flex;
   flex-direction: column;
@@ -25,8 +28,19 @@
 .mypage ul li img{
   margin: 0 auto;
   margin-bottom: var(--spacing-xs);
+  transition: transform 0.3s ease;
+}
+
+.mypage ul li:hover img {
+  transform: scale(1.1);
 }
 
 .mypage ul li span{
-  font-size: 14px;
+  font-size: 13px;
+  transition: transform 0.2s ease;
+}
+
+.mypage ul li:hover span {
+  color: var(--primary);
+  font-weight: 500;
 }

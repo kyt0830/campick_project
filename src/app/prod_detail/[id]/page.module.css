@@ -184,6 +184,23 @@
     margin-bottom: var(--spacing-md);
 }
 
-.product_location {}
+.brand_btn {
+    width: 120px;
+    height: 30px;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #f3f3f3;    */
+    border-radius: 5px;
+    outline: 1px solid var(--border-color-basic);
+    border: none;
+    font-size: 12px;
+}
 
-.product_date {}
+.btn_group .soldout {
+    border: 1px solid var(--border-color-basic);
+    background-color: #fff;
+    color: var(--font-color-placeholder);
+    pointer-events: none;
+}

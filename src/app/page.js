@@ -7,47 +7,28 @@
  * 수정이력:
  *  2025-09-04: index.html의 main content-> next.js 문법으로 변경
  * 
- * 
 */
-'use client'
-import { supabase } from "../lib/supabaseClient";
-import { useEffect, useState } from "react";
+import { createClient } from "../utils/supabase/server";
 import BannerSlide from './slideComponent';
 import BrandSlide from './brandSlideComponent';
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
-export default function Home() {
-
-  const [product, setProduct] = useState([]);
-  const [user, setUser] = useState(null); //로그인한 유저 정보 할당
-
-  // const supabase = createClient();
-  useEffect(() => {
-    const checkUser = async () => {
-      //유저정보 조회
-      const { data: { user } } = await supabase.auth.getUser()
-      setUser(user);
-    }
-    checkUser();
-  }, []);
-
-  // 상품 데이터 가져오기
-  useEffect(() => {
-    const getProd = async () => {
-      const { data: product, error: product_error } = await supabase
-        .from("Product")
-        .select()
-        .order("created_at", { ascending: false }); // 내림차순 정렬;
-      setProduct(product);
-    }
-    getProd();
-  }, []);
-  console.log(user);
-  console.log(user);
+export default async function Home() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser(); // 유저 정보 조회
+  const { data: product, error: product_error } = await supabase // 상품 정보 가져오기
+    .from("Product")
+    .select()
+    .order("created_at", { ascending: false }); // 내림차순 정렬
   return (
     <>
+    
+      <div>
+        {user?.email|| (<div>로그인</div>)}
+      </div>
+   
       {/* common_slide_content */}
       <div className={`common_slider_container ${styles.common_slider_container}`}>
         <div className="common_slider_wrapper">

@@ -8,80 +8,76 @@
  *  2025-09-04: chat.html의 코드 next.js 문법으로 변경
 */
 "use client"
-
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from '../../../utils/supabase/client';
 import Image from "next/image"
 import Link from "next/link"
 import styles from "./page.module.css"
 
-
-
-// export const metadata = {
-//   title: "Campick - 상대방ID",
-//   description: "Welcome to Campick",
-// };
-
 export default function Chat({ params }) {
   const supabase = createClient();
-  // URL params가 있으면 사용하고, 없으면 임시값(chat_id=3) 사용
-  // const chatRoomId = params?.chatId ? Number(params.chatId) : 3;
-  const chatRoomId = 3;
-  // 현재 로그인된 사용자 (문제에서 seller(user_id=4)로 가정)
-  const currentUserId = 4;
-
+  const router = useRouter();
+  const { id } = React.use(params);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [chatRoom, setChatRoom] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [product, setProduct] = useState("");
   const messagesEndRef = useRef(null);
-  // 컴포넌트 마운트 또는 chatRoomId 변경 시 채팅방 정보&메시지 로드
-  useEffect(() => {  // 채팅방 정보 로드 (ChatRoom 테이블에서 chat_id로 단일 조회)
-    const loadChatRoom = async () => {
+  const chatRoomId = id;
+  useEffect(() => {
+    const loadAll = async () => {
       try {
-        const { data, error } = await supabase
-          .from('ChatRoom')
-          .select('*')
-          .eq('chat_id', chatRoomId)
+        const { data: userData } = await supabase.auth.getUser();
+        setUser(userData.user);
+
+        const { data: chatData } = await supabase
+          .from("ChatRoom")
+          .select("*")
+          .eq("chat_id", chatRoomId)
           .single();
 
-        if (error) throw error;
-        setChatRoom(data);
+        setChatRoom(chatData);
+
+        const [{ data: messagesData }, { data: productData }] = await Promise.all([
+          supabase.from("ChatMessage")
+            .select("*")
+            .eq("chat_id", chatRoomId)
+            .order("created_at", { ascending: true }),
+          supabase.from("Product")
+            .select("*")
+            .eq("prod_id", chatData.prod_id)
+            .single(),
+        ]);
+
+        setMessages(messagesData);
+        setProduct(productData);
       } catch (err) {
-        console.error('채팅방 로드 에러:', err);
-        setChatRoom(null);
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
 
-    // 메시지 불러오기 (ChatMessage 테이블에서 chat_id 기준)
-    const loadMessages = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('ChatMessage')
-          .select('message_id, chat_id, sender_id, content, created_at, is_read')
-          .eq('chat_id', chatRoomId)
-          .order('created_at', { ascending: true });
-
-        if (error) throw error;
-        setMessages(data || []);
-      } catch (err) {
-        console.error('메시지 로드 에러:', err);
-      }
-    };
-
-    loadChatRoom();
-    loadMessages();
+    loadAll();
     // eslint-disable-next-line
   }, [chatRoomId]);
-
-
-
+  if (loading) return <p>불러오는 중...</p>;
+  if (!user) return <p>로그인이 필요합니다.</p>;
+  const currentUserId = user?.id;
+  console.log(user);
+  console.log(chatRoom);
+  console.log(chatRoom?.prod_id);
+  console.log(product);
 
   // 메시지 전송 (insert 후 반환된 행을 상태에 추가)
   const sendMessage = async () => {
     const text = newMessage.trim();
-    if (!text || isSending) return;
-
+    if (!text || isSending || !currentUserId) return;
     setIsSending(true);
     try {
       // created_at은 DB default(now())로 처리되어 있다고 가정
@@ -91,16 +87,11 @@ export default function Chat({ params }) {
           chat_id: chatRoomId,
           sender_id: currentUserId,
           content: text,
-          is_read: false
+          is_read: false,
         })
-        // 삽입된 행을 받기 위해 select 후 single 호출
-        .select('message_id, chat_id, sender_id, content, created_at, is_read')
+        .select("message_id, chat_id, sender_id, content, created_at, is_read")
         .single();
-
-
       if (error) throw error;
-
-
       // 서버에서 받은 실제 행을 messages에 추가
       setMessages((prev) => [...prev, data]);
       setNewMessage("");
@@ -129,8 +120,10 @@ export default function Chat({ params }) {
     return `${period} ${hour}시 ${minute}분`;
   };
 
+  const prev = () => {
+    router.back();
+  }
 
-  console.log(params)
   return (
     <>
       <div className={styles.chat_content}>
@@ -138,7 +131,7 @@ export default function Chat({ params }) {
         <div className={styles.chat_header}>
           <div className={styles.chat_header_top}>
             <h3 className={`small_tb ${styles.chat_title}`}>user_id</h3>
-            <button className={styles.prev}>
+            <button className={styles.prev} onClick={prev}>
               <svg xmlns="http://www.w3.org/2000/svg" height="12px" viewBox="0 -960 960 960"
                 width="12.1758H4" fill="#666666">
                 <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
@@ -146,17 +139,17 @@ export default function Chat({ params }) {
             </button>
           </div>
           <div className={styles.chat_product_info}>
-            <a className={styles.chat_thumbnail}>
+            <Link className={styles.chat_thumbnail} href={""}>
               <Image
-                src="/images/product_img01.jpg"
+                src={product?.prod_images.split(",")[0] || ("로딩중")}
                 width={60}
                 height={60}
                 alt=""
               />
-            </a>
+            </Link>
             <div className={styles.chat_meta}>
-              <h4 className={`xsmall_tr ${styles.chat_product_title}`}>[힐레베르그] 알락 2 텐트 (Allak 2)</h4>
-              <p className={`small_tb ${styles.chat_product_price}`}>1,893,000원</p>
+              <h4 className={`xsmall_tr ${styles.chat_product_title}`}>{product?.prod_title || ("로딩중")}</h4>
+              <p className={`small_tb ${styles.chat_product_price}`}>{product?.prod_price.toLocaleString() || ("로딩중")}원</p>
             </div >
             <div className={styles.chat_button_group} >
               <button className={styles.wishlist} > 찜</button >

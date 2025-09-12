@@ -82,15 +82,26 @@ export default function RootLayout({ children }) {
                     </Link>
                   </li>
                   <li>
-                    <Link href="/login">
+                    {user ? (<Link href="/mypage">
                       <Image
                         src="/images/header_person.svg"
                         alt="로그인"
                         width={14}
                         height={14}
                       />
-                      <span className="ir_pm">로그인</span>
+                      <span className="ir_pm">마이페이지</span>
                     </Link>
+                    ) : (
+                      <Link href="/login">
+                        <Image
+                          src="/images/header_person.svg"
+                          alt="로그인"
+                          width={14}
+                          height={14}
+                        />
+                        <span className="ir_pm">로그인</span>
+                      </Link>
+                    )}
                   </li>
                 </ul>
               </nav>
@@ -190,7 +201,7 @@ export default function RootLayout({ children }) {
             </p>
           </footer>
         </div>
-      </body>
-    </html>
+      </body >
+    </html >
   );
 }

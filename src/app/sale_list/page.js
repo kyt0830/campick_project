@@ -4,14 +4,14 @@ import Image from "next/image";
 import Link from 'next/link';
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
-import { createClient } from "@supabase/supabase-js";
-
+//import { createClient } from "@supabase/supabase-js";
+import { createBrowserClient } from '@supabase/ssr';
 import styles from "./page.module.css";
 import Head from "next/head";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createBrowserClient(supabaseUrl, supabaseKey);
 
 function timeAgo(timestamp) {
   const now = new Date();
@@ -36,6 +36,8 @@ export default function Salelist() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
+  const [userLoading, setUserLoading] = useState(true);
 
   const router = useRouter();
 
@@ -86,6 +88,47 @@ export default function Salelist() {
     };
 
     fetchProducts();
+  }, []);
+
+  /* 유저 정보 가져오기 */
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        setUserLoading(true);
+        
+        // 세션부터 확인
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        console.log('세션 정보:', session);
+        
+        if (sessionError) {
+          console.error('세션 오류:', sessionError);
+          return;
+        }
+        
+        if (!session) {
+          console.log('세션이 없습니다 - 로그인되지 않음');
+          setUser(null);
+          return;
+        }
+        
+        // 유저 정보 가져오기
+        const { data: { user }, error } = await supabase.auth.getUser();
+        console.log('유저 정보:', user);
+        
+        if (error) {
+          console.error('유저 정보 조회 실패:', error);
+          return;
+        }
+        
+        setUser(user);
+      } catch (error) {
+        console.error('예외 발생:', error);
+      } finally {
+        setUserLoading(false);
+      }
+    };
+    
+    getUser();
   }, []);
 
   /* 탭 클릭 */

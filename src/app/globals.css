@@ -431,6 +431,9 @@ body {
     background: var(--primary);
 }
 
+.point_btn:hover {
+    background: var(--primary);
+}
 
 /* product_list 3col ver  */
 .product_list_wrapper {
@@ -545,7 +548,6 @@ body {
     opacity: 1;
     pointer-events: auto
 }
-
 .more_popup,
 .brand_popup {
     width: var(--container);
@@ -560,6 +562,11 @@ body {
     transition: bottom 0.2s ease;
     z-index: 100;
     margin: 0;
+}
+
+.more_popup.active,
+.brand_popup.active {
+    bottom: 0;
 }
 
 .more_popup.active,

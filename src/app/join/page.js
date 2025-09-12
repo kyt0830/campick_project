@@ -36,7 +36,7 @@ const handleKakaoLogin = async () => {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "kakao",
         options: {
-          redirectTo: "http://localhost:3000", // 로그인 후 이동할 URL
+          redirectTo: "https://campick-project.vercel.app/", // 로그인 후 이동할 URL
         },
       });
 

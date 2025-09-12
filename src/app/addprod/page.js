@@ -3,24 +3,49 @@
  * 담당자: 김영태
  * 작성일: 2025-09-04
  * 최근 수정일: 2025-09-04
- * 설명: add_prod.html의 next.js 버전
+ * 설명: add_prod.html의 next.js 버전 (수정됨)
  * 수정이력:
  *  2025-09-04: add_prod.html의 코드 next.js 문법으로 변경
+ *  2025-09-11: 카테고리, 브랜드, 제품상태, 보증서 값 제대로 전달되도록 수정
 */
 "use client";
 import { createClient } from '../../utils/supabase/client';
-import Image from "next/image";
-import Link from 'next/link';
-import styles from './page.module.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation'
 
-// export const metadata = {
-//   title: "Campick - 상품등록",
-//   description: "Welcome to Campick",
-// };
+import Image from "next/image";
+import styles from './page.module.css'
 
 export default function AddProd() {
   const supabase = createClient();
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [prodData, setProdData] = useState({
+    prod_title: "",
+    prod_price: "",
+    prod_category: "",
+    prod_brand: "",
+    prod_condition: "good", // 기본값 설정
+    warranty: "yes", // 기본값 설정
+    prod_desc: "",
+    trade_method: ["delivery"],
+    tag: [],
+    prod_images: [],
+    user_id: ""
+  });
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      setLoading(false);
+    };
+    checkUser();
+  }, []);
+  
+  if (loading) return <div> 사용자 정보를 불러오고 있습니다...</div>
+
   const brands = [
     { title: "힐레베르그 Hilleberg", value: "A01" },
     { title: "몽벨 Montbell", value: "A02" },
@@ -29,6 +54,7 @@ export default function AddProd() {
     { title: "엠에스알 Msr", value: "A05" },
     { title: "니모 Nemo", value: "A06" },
   ];
+  
   const categories = [
     { title: "텐트/타프", value: "A01" },
     { title: "침구/매트", value: "A02" },
@@ -41,22 +67,10 @@ export default function AddProd() {
     { title: "웨건/카드", value: "A09" },
     { title: "계절용품/기타", value: "A10" }
   ];
-  const [prodData, setProdData] = useState({
-    prod_title: "",
-    prod_price: "",
-    prod_category: "",
-    prod_brand: "",
-    prod_condition: "",
-    warranty: "",
-    prod_desc: "",
-    trade_method: ["delivery"],
-    tag: [],
-    prod_images: [],
-    user_id: ""
-  });
 
   const handleChange = (evt) => {
     const { name, value, type, checked } = evt.target
+    
     if (type === "checkbox") {
       setProdData((prev) => {
         let trade_method = [...prev.trade_method];
@@ -74,19 +88,33 @@ export default function AddProd() {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    
+    // 필수 필드 검증
+    if (!prodData.prod_category) {
+      alert("카테고리를 선택해주세요.");
+      return;
+    }
+    if (!prodData.prod_brand) {
+      alert("브랜드를 선택해주세요.");
+      return;
+    }
+    
+    console.log("제출할 데이터:", prodData); // 디버깅용
+    
     const { error } = await supabase.from("Product").insert({
       prod_title: prodData.prod_title,
-      prod_price: Number(prodData.prod_price), //숫자형 자료로 변환
+      prod_price: Number(prodData.prod_price),
       prod_category: prodData.prod_category,
       prod_brand: prodData.prod_brand,
       prod_condition: prodData.prod_condition,
       warranty: prodData.warranty,
       prod_desc: prodData.prod_desc,
-      trade_method: prodData.trade_method.join(","), // 배열 → 문자열 저장
+      trade_method: prodData.trade_method.join(","),
       tag: prodData.tag.join(","),
       prod_images: prodData.prod_images.join(","),
-      user_id: 'f32aa74b-365e-4dff-a302-4d526ecdd38c'
+      user_id: user.id
     });
+    
     if (error) {
       console.error(error);
       alert("상품 등록 중 오류가 발생했습니다.");
@@ -97,14 +125,15 @@ export default function AddProd() {
         prod_price: "",
         prod_category: "",
         prod_brand: "",
-        prod_condition: "",
-        warranty: "",
+        prod_condition: "good",
+        warranty: "yes",
         prod_desc: "",
-        trade_method: [],
+        trade_method: ["delivery"],
         tag: [],
         prod_images: [],
         user_id: ""
       });
+      router.push("/");
     }
   };
 
@@ -116,11 +145,10 @@ export default function AddProd() {
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      const fileName = `${Date.now()}_${file.name}`; // 파일명 충돌 방지 -> 현재 시간이 입력
+      const fileName = `${Date.now()}_${file.name}`;
 
-      //  Supabase Storage에 업로드
       const { error } = await supabase.storage
-        .from("prod_images") //  Storage 버킷명 
+        .from("prod_images")
         .upload(fileName, file);
 
       if (error) {
@@ -128,7 +156,6 @@ export default function AddProd() {
         continue;
       }
 
-      //  업로드 후 Public URL 가져오기
       const { data } = supabase.storage
         .from("prod_images")
         .getPublicUrl(fileName);
@@ -138,25 +165,23 @@ export default function AddProd() {
       }
     }
 
-    // ✅ setProdData 이미지 URL 저장
     setProdData((prev) => ({
-      ...prev, // 기존 내용 나열
-      prod_images: [...prev.prod_images, ...uploadedUrls],//배열에 내용 추가
+      ...prev,
+      prod_images: [...prev.prod_images, ...uploadedUrls],
     }));
   };
 
-  // 이미지 삭제 함수 추가
   const removeImage = (indexToRemove) => {
     setProdData((prev) => ({
       ...prev,
-      prod_images: prev.prod_images.filter((_, index) => index !== indexToRemove) // 선택된 index 번호를 제외한 나머지를 필터링해서 다시 저장
+      prod_images: prev.prod_images.filter((_, index) => index !== indexToRemove)
     }));
   };
 
   const addTags = () => {
     const tagInput = document.getElementById('tagInput');
-    const inputValue = tagInput.value.trim();//공백삭제
-    if (inputValue === '') return;//빈값이면 아무일도 일어나지 않음
+    const inputValue = tagInput.value.trim();
+    if (inputValue === '') return;
 
     setProdData({
       ...prodData,
@@ -181,11 +206,10 @@ export default function AddProd() {
 
   return (
     <>
-      {/* form  */}
       <div className={styles.form_content}>
         <h2 className={styles.form_title}>내 상품 판매하기</h2>
         <form className={styles.form_style} onSubmit={handleSubmit}>
-          {/* 사진 업로드  */}
+          {/* 사진 업로드 */}
           <div className={styles.image_upload}>
             <label htmlFor="imageInput" className={styles.upload_box}>
               <span className={styles.upload_icon} aria-hidden="true">
@@ -199,140 +223,248 @@ export default function AddProd() {
             </label>
             <input type="file" id="imageInput" multiple accept="image/*" onChange={handleFileChange} hidden />
           </div>
-          {prodData.prod_images.length > 0 &&
-            (
-              <div className={styles.uploaded_image_box}>
-                {prodData.prod_images.slice(0, 10).map((imageUrl, index) => (
-                  <div key={index} className={styles.uploaded_image_item}>
-                    {index === 0 && <span className={styles.thumbnail}>대표사진</span>}
-                    <Image
-                      src={imageUrl}
-                      width={80}
-                      height={80}
-                      alt={`업로드된 이미지 ${index + 1}`}
-                    />
-                    <button
-                      type="button"
-                      className={styles.remove_image_btn}
-                      onClick={() => removeImage(index)}
-                    >
-                      ×
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )
-          }
+          
+          {prodData.prod_images.length > 0 && (
+            <div className={styles.uploaded_image_box}>
+              {prodData.prod_images.slice(0, 10).map((imageUrl, index) => (
+                <div key={index} className={styles.uploaded_image_item}>
+                  {index === 0 && <span className={styles.thumbnail}>대표사진</span>}
+                  <Image
+                    src={imageUrl}
+                    width={80}
+                    height={80}
+                    alt={`업로드된 이미지 ${index + 1}`}
+                  />
+                  <button
+                    type="button"
+                    className={styles.remove_image_btn}
+                    onClick={() => removeImage(index)}
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
           {/* 상품명 */}
           <div className={styles.product_title}>
             <label className="ir_pm" htmlFor="prod_title">상품명</label>
-            <input className={styles.label_box} type="text" id="prod_title" placeholder="상품명" name="prod_title" onChange={handleChange} required />
+            <input 
+              className={styles.label_box} 
+              type="text" 
+              id="prod_title" 
+              placeholder="상품명" 
+              name="prod_title" 
+              value={prodData.prod_title}
+              onChange={handleChange} 
+              required 
+            />
           </div>
 
-          {/* 판매 가격  */}
+          {/* 판매 가격 */}
           <div className={styles.product_pirce}>
             <label className="ir_pm" htmlFor="prod_price">판매 가격</label>
-            <input className={styles.label_box} type="text" id="prod_price" placeholder="판매 가격" name="prod_price" onChange={handleChange} required />
+            <input 
+              className={styles.label_box} 
+              type="text" 
+              id="prod_price" 
+              placeholder="판매 가격" 
+              name="prod_price" 
+              value={prodData.prod_price}
+              onChange={handleChange} 
+              required 
+            />
           </div>
 
           {/* 카테고리 */}
           <div className={styles.product_category}>
-            <select name="prod_category" onChange={handleChange}>
-              <option value="" disabled defaultValue="" >카테고리 선택</option>
-              {categories.map((category, idx) => <option key={idx} value={category.value}>{category.title}</option>)}
+            <select 
+              className={styles.category_btn} 
+              name="prod_category" 
+              value={prodData.prod_category}
+              onChange={handleChange}
+              required
+            >
+              <option value="">카테고리 선택</option>
+              {categories.map((category, idx) => (
+                <option key={idx} value={category.value}>{category.title}</option>
+              ))}
             </select>
           </div>
 
-          {/* 브랜드  */}
+          {/* 브랜드 */}
           <div className={styles.product_brand}>
-            <select name="prod_brand" onChange={handleChange}>
-              <option value="" disabled defaultValue="" >브랜드 선택</option>
-              {brands.map((brand, idx) => <option key={idx} value={brand.value}>{brand.title}</option>)}
+            <select 
+              className={styles.brand_btn} 
+              name="prod_brand" 
+              value={prodData.prod_brand}
+              onChange={handleChange}
+              required
+            >
+              <option value="">브랜드 선택</option>
+              {brands.map((brand, idx) => (
+                <option key={idx} value={brand.value}>{brand.title}</option>
+              ))}
             </select>
-          </div >
+          </div>
 
-          {/* 제품 상태  */}
-          < div className={styles.product_status}>
-            <h3 className={`normal_tb ${styles.product_status_title} ${styles.title}`}> 제품 상태</h3 >
+          {/* 제품 상태 */}
+          <div className={styles.product_status}>
+            <h3 className={`normal_tb ${styles.product_status_title} ${styles.title}`}>제품 상태</h3>
             <div className={styles.product_status_checkbox}>
-              <input type="radio" name="prod_condition" value="new" id="new" onChange={handleChange} />
+              <input 
+                type="radio" 
+                name="prod_condition" 
+                value="new" 
+                id="new" 
+                checked={prodData.prod_condition === "new"}
+                onChange={handleChange} 
+              />
               <label className="small_tr" htmlFor="new">미개봉</label>
 
-              <input type="radio" name="prod_condition" value="good" id="good" onChange={handleChange} defaultChecked />
+              <input 
+                type="radio" 
+                name="prod_condition" 
+                value="good" 
+                id="good" 
+                checked={prodData.prod_condition === "good"}
+                onChange={handleChange} 
+              />
               <label className="small_tr" htmlFor="good">양호</label>
 
-              <input type="radio" name="prod_condition" value="normal" id="normal" onChange={handleChange} />
-              <label className="small_tr" htmlFor="normal"> 보통</label>
+              <input 
+                type="radio" 
+                name="prod_condition" 
+                value="normal" 
+                id="normal" 
+                checked={prodData.prod_condition === "normal"}
+                onChange={handleChange} 
+              />
+              <label className="small_tr" htmlFor="normal">보통</label>
 
-              <input type="radio" name="prod_condition" value="used" id="used" onChange={handleChange} />
-              <label className="small_tr" htmlFor="used"> 사용감 있음</label>
+              <input 
+                type="radio" 
+                name="prod_condition" 
+                value="used" 
+                id="used" 
+                checked={prodData.prod_condition === "used"}
+                onChange={handleChange} 
+              />
+              <label className="small_tr" htmlFor="used">사용감 있음</label>
 
-              <input type="radio" name="prod_condition" value="repair" id="repair" onChange={handleChange} />
-              <label className="small_tr" htmlFor="repair"> 수리/수선 필요</label>
-            </div >
-          </div >
+              <input 
+                type="radio" 
+                name="prod_condition" 
+                value="repair" 
+                id="repair" 
+                checked={prodData.prod_condition === "repair"}
+                onChange={handleChange} 
+              />
+              <label className="small_tr" htmlFor="repair">수리/수선 필요</label>
+            </div>
+          </div>
 
-          {/* 보증서 유무  */}
-          < div className={styles.warranty_status} >
-            <h3 className={`normal_tb ${styles.warranty_status_title} ${styles.title}`}> 보증서 유무</h3 >
+          {/* 보증서 유무 */}
+          <div className={styles.warranty_status}>
+            <h3 className={`normal_tb ${styles.warranty_status_title} ${styles.title}`}>보증서 유무</h3>
             <div className={styles.warranty_status_checkbox}>
-              <input type="radio" name="warranty" value="yes" id="yes" onChange={handleChange} defaultChecked />
-              <label className="small_tr" htmlFor="yes"> 유</label>
+              <input 
+                type="radio" 
+                name="warranty" 
+                value="yes" 
+                id="yes" 
+                checked={prodData.warranty === "yes"}
+                onChange={handleChange} 
+              />
+              <label className="small_tr" htmlFor="yes">유</label>
 
-              <input type="radio" name="warranty" value="no" id="no" onChange={handleChange} />
-              <label className="small_tr" htmlFor="no"> 무</label>
-            </div >
-          </div >
+              <input 
+                type="radio" 
+                name="warranty" 
+                value="no" 
+                id="no" 
+                checked={prodData.warranty === "no"}
+                onChange={handleChange} 
+              />
+              <label className="small_tr" htmlFor="no">무</label>
+            </div>
+          </div>
 
-          {/* 자세한 설명  */}
-          < div className={styles.product_description} >
-            <h3 className={`normal_tb ${styles.product_description_title} ${styles.title}`}> 자세한 설명</h3 >
-            <textarea id="prod_desc" className={styles.product_extra} name="prod_desc" rows="6" onChange={handleChange}
-              placeholder="구매자가 알아야 할 정보를 입력해주세요.&#10;- 사용감(스크래치, 얼룩, 하자부분 등)&#10;- 사용기간(구매 시기 등)&#10;- 고장, 파손, 염색 등 하자 정보는 꼭 기재해주세요!" ></textarea >
-          </div >
+          {/* 자세한 설명 */}
+          <div className={styles.product_description}>
+            <h3 className={`normal_tb ${styles.product_description_title} ${styles.title}`}>자세한 설명</h3>
+            <textarea 
+              id="prod_desc" 
+              className={styles.product_extra} 
+              name="prod_desc" 
+              rows="6" 
+              value={prodData.prod_desc}
+              onChange={handleChange}
+              placeholder="구매자가 알아야 할 정보를 입력해주세요.&#10;- 사용감(스크래치, 얼룩, 하자부분 등)&#10;- 사용기간(구매 시기 등)&#10;- 고장, 파손, 염색 등 하자 정보는 꼭 기재해주세요!"
+            />
+          </div>
 
-          {/* 거래 방식  */}
-          < div className={styles.trade_status} >
-            <h3 className={`normal_tb ${styles.trade_title} ${styles.title}`}> 거래 방식</h3 >
+          {/* 거래 방식 */}
+          <div className={styles.trade_status}>
+            <h3 className={`normal_tb ${styles.trade_title} ${styles.title}`}>거래 방식</h3>
             <div className={styles.trade_checkbox}>
-              <input type="checkbox" name="trade_method" value="delivery" id="delivery" onChange={handleChange} defaultChecked />
-              <label className="small_tr" htmlFor="delivery"> 택배</label>
-              <input type="checkbox" name="trade_method" value="direct" id="direct" onChange={handleChange} />
+              <input 
+                type="checkbox" 
+                name="trade_method" 
+                value="delivery" 
+                id="delivery" 
+                checked={prodData.trade_method.includes("delivery")}
+                onChange={handleChange} 
+              />
+              <label className="small_tr" htmlFor="delivery">택배</label>
+              
+              <input 
+                type="checkbox" 
+                name="trade_method" 
+                value="direct" 
+                id="direct" 
+                checked={prodData.trade_method.includes("direct")}
+                onChange={handleChange} 
+              />
               <label className="small_tr" htmlFor="direct">직거래</label>
-            </div >
-          </div >
+            </div>
+          </div>
 
           {/* 태그(선택 사항) */}
-          < div className={styles.product_tag}>
-            <h3 className={`normal_tb ${styles.product_tag_title} ${styles.title}`}> 태그(선택 사항) < span className="xsmall_tr" > 최대 10개</span ></h3 >
+          <div className={styles.product_tag}>
+            <h3 className={`normal_tb ${styles.product_tag_title} ${styles.title}`}>태그(선택 사항) <span className="xsmall_tr">최대 10개</span></h3>
             <div className={styles.product_tag_content}>
               <div className={styles.product_tag_input}>
-                <input type="text" id="tagInput" className={styles.tag_input} placeholder="예시 '새상품', '미개봉'" onKeyDown={enterKeyPress} />
-                <button type="button" className={`small_tr ${styles.tag_add_btn}`} onClick={addTags}> 추가</button >
-              </div >
+                <input 
+                  type="text" 
+                  id="tagInput" 
+                  className={styles.tag_input} 
+                  placeholder="예시 '새상품', '미개봉'" 
+                  onKeyDown={enterKeyPress} 
+                />
+                <button type="button" className={`small_tr ${styles.tag_add_btn}`} onClick={addTags}>추가</button>
+              </div>
               <ul className={styles.tag_list}>
-                {prodData.tag.map((tag, idx) => {
-                  return (
-                    <li key={idx} className={`small_tr ${styles.tag_item} `}>
-                      <span>{tag}</span>
-                      <button className={styles.tag_delete_btn} onClick={() => removeTag(idx)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px"
-                          fill="#939393">
-                          <path
-                            d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z" />
-                        </svg>
-                      </button >
-                    </li >
-                  )
-                })}
-              </ul >
-            </div >
-          </div >
+                {prodData.tag.map((tag, idx) => (
+                  <li key={idx} className={`small_tr ${styles.tag_item}`}>
+                    <span>{tag}</span>
+                    <button className={styles.tag_delete_btn} onClick={() => removeTag(idx)}>
+                      <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px"
+                        fill="#939393">
+                        <path
+                          d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z" />
+                      </svg>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
 
-          <button type="submit" className={styles.submit_button}> 상품등록</button >
-        </form >
-      </div >
-      {/* //form  */}
+          <button type="submit" className={styles.submit_button}>상품등록</button>
+        </form>
+      </div>
 
       {/* common_caution_banner */}
       <div className="caution_banner">
@@ -359,7 +491,6 @@ export default function AddProd() {
         </div>
       </div>
       {/* //common_caution_banner */}
-
     </>
   )
 }

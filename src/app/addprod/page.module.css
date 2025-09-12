@@ -67,8 +67,9 @@ main {
 
 .category_btn,
 .brand_btn {
-    width: 120px;
+    width: 250px;
     height: 40px;
+    padding-left: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,7 +79,6 @@ main {
     border: none;
     color: var(--font-color-placeholder);
 }
-
 
 .product_status_checkbox,
 .warranty_status_checkbox,
@@ -267,6 +267,7 @@ main {
     background-color: rgba(255, 0, 0, 0.8);
     transform: scale(1.1);
 }
-.tag_delete_btn{
+
+.tag_delete_btn {
     cursor: pointer;
 }

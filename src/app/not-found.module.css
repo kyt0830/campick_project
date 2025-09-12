@@ -1,0 +1,47 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+}
+.errorcode h1 {
+  font-size: 50px;
+  font-weight: 700;
+  color: var(--font-color-basic);
+}
+
+.errorinfo {
+  margin-bottom: var(--spacing-md) ;
+}
+
+.errorinfo .title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--font-color-basic);
+  margin-bottom: 12px;
+}
+
+.errorinfo .desc {
+  font-size: 14px;
+  color: var(--font-color-light-gray);
+}
+
+.go {
+  margin-bottom: var(--spacing-md);
+}
+
+.go_btn {
+  background: #ff5132;
+  font-size: 12px;
+  color: var(--font-color-white);
+  white-space: nowrap;
+  border-radius: 50px;
+  padding: 12px 18px;
+  transition: all .2s ease;
+}
+
+.go_btn:hover {
+  background-color: var(--primary);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}

@@ -7,34 +7,51 @@
  * 수정이력:
  *  2025-09-04: prod_detail.html의 코드 next.js 문법으로 변경
 */
-import { createClient } from '../../../utils/supabase/client';
+import { createClient } from "../../../utils/supabase/server";
 import ProdDetailClient from './component';
+import Change from "./change";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css"
-
 export default async function ProdDetail({ params }) {
-  console.log(params)
+  const { id } = await params;
   const supabase = await createClient();
+
+  const { data: { user } } = await supabase.auth.getUser();
   const { data: product, error: product_error } = await supabase
     .from("Product")
     .select("*")
-    .eq('prod_id', params.id)
+    .eq("prod_id", id)
     .single();
-
+  if (product_error || !product) {
+    console.error("상품 조회 실패:", product_error?.message);
+    return;
+  }
   const { data: allProduct, error: all_error } = await supabase
     .from("Product")
     .select();
-  // 문자열로 이루어진 데이터를 배열로 반환 및 변수 할당
+  if (all_error) {
+    console.error("전체 상품 조회 실패:", all_error.message);
+  }
+  // 4. 상품 조회가 끝난 뒤 -> prod_id 기반으로 채팅룸 조회
+  let chatRoom = null;
+  let chatRoom_error = null;
 
-  console.log(product.tag);
+  if (product?.prod_id) {
+    const { data, error } = await supabase
+      .from("ChatRoom")
+      .select("*")
+      .eq("prod_id", product.prod_id) // ✅ 하드코딩 제거
+      .single();
+    chatRoom = data;
+    chatRoom_error = error;
+    if (chatRoom_error) {
+      console.error("채팅룸 조회 실패:", chatRoom_error.message);
+    }
+  }
+  console.log('채팅룸', chatRoom);
   const tags = product.tag.split(',');
   const images = product.prod_images.split(',');
-  console.log(tags);
-  console.log(images);
-
-  console.log(product)
-  console.log(allProduct)
   return (
     <>
       {/* product_detail  */}
@@ -109,14 +126,21 @@ export default async function ProdDetail({ params }) {
               </li>)}
             </ul>
             {/* 해당 상품이 로그인된 사용자의 상품이라면 */}
-
+            {product.user_id === user.id && (<Change option={product} />)}
           </div >
 
 
           <div className={styles.btn_group}>
-            {/* 해당 상품이 로그인된 사용자의 상품이라면 */}
-            <button className={styles.chat}><Link href={`/chat/${product.prod_id}`}>채팅하기</Link></button >
-            <button className={styles.pay}><Link href={`/payment_select`}>결제하기</Link></button >
+            {product.prod_status === 0 ? (
+              <>
+                <button className={styles.soldout} disabled> 판매 완료 </button >
+              </>
+            ) : (
+              <>
+                <button className={styles.chat}><Link href={product.user_id === user.id ? "/messages" : `/chat/${chatRoom.chat_id}`}>채팅하기</Link></button >
+                <button className={styles.pay}><Link href="/payment_select">결제하기</Link></button >
+              </>
+            )}
           </div >
         </div >
 
