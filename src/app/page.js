@@ -20,7 +20,7 @@ export default async function Home() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser(); // 유저 정보 조회
   const { data: product, error: product_error } = await supabase // 상품 정보 가져오기
-    .from("Product")
+    .from("product")
     .select()
     .eq("prod_status", 1)
     .order("created_at", { ascending: false }); // 내림차순 정렬
@@ -108,7 +108,7 @@ export default async function Home() {
       <div className={styles.keyword_product_content}>
         <h3 className={`medium_tb ${styles.keyword_product_title}`}>식집사에요 님이 주목하는 키워드 상품</h3>
         <ul className={`product_list_wrapper ${styles.product_list_wrapper}`}>
-          {product.slice(0, 3).map(item =>
+          {product?.slice(0, 3).map(item =>
             <li className="product_card" key={item.prod_id}>
               <Link href="#">
                 <div className="product_image">
@@ -151,7 +151,7 @@ export default async function Home() {
                 </div>
               </Link>
             </li>
-          )}
+          ) || []}
         </ul>
         <button className="more_btn">더 보기</button>
       </div>
@@ -161,7 +161,7 @@ export default async function Home() {
       <div className={styles.popular_product_content}>
         <h3 className={`medium_tb ${styles.popular_product_title}`}>가장 인기있는 상품</h3>
         <ul className={`product_list_wrapper ${styles.product_list_wrapper}`}>
-          {product.slice(0, 3).map(item =>
+          {product?.slice(0, 3).map(item =>
             <li className="product_card" key={item.prod_id}>
               <Link href="#">
                 <div className="product_image">
@@ -204,7 +204,7 @@ export default async function Home() {
                 </div>
               </Link>
             </li>
-          )}
+          ) || []}
         </ul>
         <button className="more_btn">더 보기</button>
       </div>
@@ -275,7 +275,7 @@ export default async function Home() {
       <div className={styles.ramdom_product_content}>
         <h3 className={`medium_tb ${styles.ramdom_product_title}`}>이런건 어때요?</h3>
         <ul className={`product_list_wrapper ${styles.product_list_wrapper}`}>
-          {product.slice(0, 3).map(item =>
+          {product?.slice(0, 3).map(item =>
             <li className="product_card" key={item.prod_id}>
               <Link href="#">
                 <div className="product_image">
@@ -318,7 +318,7 @@ export default async function Home() {
                 </div>
               </Link >
             </li>
-          )}
+          ) || []}
         </ul>
         <button className="more_btn">더 보기</button>
       </div>

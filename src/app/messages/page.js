@@ -23,15 +23,15 @@ export default async function messages() {
 
   const { data: { user } } = await supabase.auth.getUser(); // 유저 정보 조회
   const { data: seller_chat, error: seller_error } = await supabase // 내가 판매자인 채팅
-    .from("ChatRoom")
+    .from("chatRoom")
     .select()
     .eq("seller_id", user.id);
   const { data: buyer_chat, error: buyer_error } = await supabase // 내가 구매자인 채팅
-    .from("ChatRoom")
+    .from("chatRoom")
     .select()  // select()를 먼저
     .eq("buyer_id", user.id);  // 그 다음 조건
   const { data: product, error: product_error } = await supabase // 상품 정보 가져오기
-    .from("Product")
+    .from("product")
     .select()
   console.log("내가 판매하는 채팅", seller_chat);
   console.log("내가 구매하는 채팅", buyer_chat);

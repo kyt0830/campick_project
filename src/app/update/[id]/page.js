@@ -62,7 +62,7 @@ export default function ProductUpdate() {
         setLoading(true);
 
         const { data, error } = await supabase
-          .from('Product')
+          .from('product')
           .select('*')
           .eq('prod_id', id)
           .single();
@@ -264,7 +264,7 @@ export default function ProductUpdate() {
 
       // Supabase 업데이트
       const { error } = await supabase
-        .from('Product')
+        .from('product')
         .update(updateData)
         .eq('prod_id', id);
 

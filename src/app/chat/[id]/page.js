@@ -36,7 +36,7 @@ export default function Chat({ params }) {
         setUser(userData.user);
 
         const { data: chatData } = await supabase
-          .from("ChatRoom")
+          .from("chatRoom")
           .select("*")
           .eq("chat_id", chatRoomId)
           .single();
@@ -44,11 +44,11 @@ export default function Chat({ params }) {
         setChatRoom(chatData);
 
         const [{ data: messagesData }, { data: productData }] = await Promise.all([
-          supabase.from("ChatMessage")
+          supabase.from("chatMessage")
             .select("*")
             .eq("chat_id", chatRoomId)
             .order("created_at", { ascending: true }),
-          supabase.from("Product")
+          supabase.from("product")
             .select("*")
             .eq("prod_id", chatData.prod_id)
             .single(),
@@ -82,7 +82,7 @@ export default function Chat({ params }) {
     try {
       // created_at은 DB default(now())로 처리되어 있다고 가정
       const { data, error } = await supabase
-        .from('ChatMessage')
+        .from('chatMessage')
         .insert({
           chat_id: chatRoomId,
           sender_id: currentUserId,

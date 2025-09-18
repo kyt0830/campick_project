@@ -80,7 +80,7 @@ export default function Store() {
         setError(null);
 
         let { data, error } = await supabase
-          .from("Product")
+          .from("product")
           .select("*")
           .eq("prod_status", 1)
           .order("created_at", { ascending: false });

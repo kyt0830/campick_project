@@ -40,6 +40,7 @@ export default function AddProd() {
       const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
       setLoading(false);
+      console.log("현재 사용자:", user); // 디버깅용
     };
     checkUser();
   }, []);
@@ -101,7 +102,7 @@ export default function AddProd() {
     
     console.log("제출할 데이터:", prodData); // 디버깅용
     
-    const { error } = await supabase.from("Product").insert({
+    const { error } = await supabase.from("product").insert({
       prod_title: prodData.prod_title,
       prod_price: Number(prodData.prod_price),
       prod_category: prodData.prod_category,

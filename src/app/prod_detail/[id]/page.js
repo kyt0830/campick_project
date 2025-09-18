@@ -19,7 +19,7 @@ export default async function ProdDetail({ params }) {
 
   const { data: { user } } = await supabase.auth.getUser();
   const { data: product, error: product_error } = await supabase
-    .from("Product")
+    .from("product")
     .select("*")
     .eq("prod_id", id)
     .single();
@@ -28,7 +28,7 @@ export default async function ProdDetail({ params }) {
     return;
   }
   const { data: allProduct, error: all_error } = await supabase
-    .from("Product")
+    .from("product")
     .select();
   if (all_error) {
     console.error("전체 상품 조회 실패:", all_error.message);
@@ -39,7 +39,7 @@ export default async function ProdDetail({ params }) {
 
   if (product?.prod_id) {
     const { data, error } = await supabase
-      .from("ChatRoom")
+      .from("chatRoom")
       .select("*")
       .eq("prod_id", product.prod_id) // ✅ 하드코딩 제거
       .single();

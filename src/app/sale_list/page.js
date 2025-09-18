@@ -101,7 +101,7 @@ export default function Salelist() {
         console.log('사용자 ID로 상품 조회:', user.id);
 
         let { data, error } = await supabase
-          .from("Product")
+          .from("product")
           .select("*")
           .eq('user_id', user.id)
           .order("created_at", { ascending: false });
@@ -201,7 +201,7 @@ export default function Salelist() {
     if (selectedProduct) {
       try {
         const { error } = await supabase
-          .from('Product')
+          .from('product')
           .update({ prod_status: 0 }) // 0 = 판매완료
           .eq('prod_id', selectedProduct.id);
 
@@ -235,7 +235,7 @@ export default function Salelist() {
     if (selectedProduct) {
       try {
         const { error } = await supabase
-          .from('Product')
+          .from('product')
           .update({ prod_status: 1 }) // 1 = 판매중
           .eq('prod_id', selectedProduct.id);
 
@@ -282,7 +282,7 @@ export default function Salelist() {
 
       // 삭제 실행
       const { data, error } = await supabase
-        .from('Product')
+        .from('product')
         .delete()
         .eq('prod_id', selectedProduct.id)
         .select('prod_id'); // 삭제된 레코드의 prod_id만 반환

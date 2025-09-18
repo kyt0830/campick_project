@@ -10,7 +10,7 @@ export default function Change({ option }) {
     if (confirm("상품의 상태를 변경 할까요?")) {
       const newStatus = evt.target.value;
       const { data, error } = await supabase
-        .from("Product")
+        .from("product")
         .update({ prod_status: newStatus })
         .eq("prod_id", product.prod_id)
         .single()
