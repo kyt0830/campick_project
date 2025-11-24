@@ -126,7 +126,8 @@ export default async function ProdDetail({ params }) {
               </li>)}
             </ul>
             {/* 해당 상품이 로그인된 사용자의 상품이라면 */}
-            {product.user_id === user.id && (<Change option={product} />)}
+            {/* {product.user_id === user.id && (<Change option={product} />)} */}
+            {user && product.user_id === user.id && (<Change option={product} />)}
           </div >
 
 
@@ -137,7 +138,7 @@ export default async function ProdDetail({ params }) {
               </>
             ) : (
               <>
-                <button className={styles.chat}><Link href={product.user_id === user.id ? "/messages" : `/chat/${chatRoom.chat_id}`}>채팅하기</Link></button >
+                <button className={styles.chat}><Link href={user && product.user_id === user.id ? "/messages" : `/chat/${chatRoom.chat_id}`}>채팅하기</Link></button >
                 <button className={styles.pay}><Link href="/payment_select">결제하기</Link></button >
               </>
             )}

@@ -1,26 +1,13 @@
-
-
 import { createClient } from "../utils/supabase/server";
-import Image from "next/image";
-import Link from 'next/link';
 import AddProdButton from "./AddProdButton";
 import "./css/reset.css";
-import './globals.css'
+import "./globals.css";
 import "./css/header.css";
 import "./css/footer.css";
 
-
-// 폰트 설정 예시
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
+import HeaderClient from "./HeaderClient";
+import Image from "next/image";
+import Link from "next/link";
 
 export const metadata = {
   title: "Campick",
@@ -31,7 +18,7 @@ export const metadata = {
       { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon/favicon-96x96.png", sizes: "96x96", type: "image/png" },
-      { url: "/favicon/android-icon-192x192.png", sizes: "192x192", type: "image/png" }
+      { url: "/favicon/android-icon-192x192.png", sizes: "192x192", type: "image/png" },
     ],
   },
   apple: [
@@ -44,156 +31,57 @@ export const metadata = {
     { url: "/favicon/apple-icon-144x144.png", sizes: "144x144" },
     { url: "/favicon/apple-icon-152x152.png", sizes: "152x152" },
     { url: "/favicon/apple-icon-180x180.png", sizes: "180x180" },
-    { url: "/favicon/apple-touch-icon.png" }
+    { url: "/favicon/apple-touch-icon.png" },
   ],
-  manifest: "/favicon/manifest.json"
-}
-
+  manifest: "/favicon/manifest.json",
+};
 
 export default async function RootLayout({ children }) {
-  const supabase = await createClient(); // await 추가 필요
+  const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  console.log(user);
+
   return (
     <html lang="ko">
       <body>
         <div className="container">
           {/* 상품등록 버튼 */}
           <AddProdButton />
-          {/* //상품등록 버튼 */}
-          <header>
-            <div className="header_top">
-              <h1 className="logo">
-                <Link href="/">
-                  <Image
-                    src="/images/logo_black.png"
-                    alt="campick logo"
-                    width={120}
-                    height={49}
-                  />
-                  <span className="ir_pm">campick</span>
-                </Link>
-              </h1>
-              <Link href="/search" className="search_area">
-                <input type="text" placeholder="어떤 캠핑 정보를 찾으시나요?" />
-                <button type="button"></button>
-              </Link>
-              <nav className="user_menu">
-                <ul>
-                  <li>
-                    <Link href="/messages">
-                      <Image
-                        src="/images/header_chat.svg"
-                        alt="메세지"
-                        width={14}
-                        height={14}
-                      />
-                      <span className="ir_pm">메세지</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/notifications">
-                      <Image
-                        src="/images/header_notifications.svg"
-                        alt="알림"
-                        width={14}
-                        height={14}
-                      />
-                      <span className="ir_pm">알림</span>
-                    </Link>
-                  </li>
-                  <li>
-                    {user ? (<Link href="/mypage">
-                      <Image
-                        src="/images/header_person.svg"
-                        alt="로그인"
-                        width={14}
-                        height={14}
-                      />
-                      <span className="ir_pm">마이페이지</span>
-                    </Link>
-                    ) : (
-                      <Link href="/login">
-                        <Image
-                          src="/images/header_person.svg"
-                          alt="로그인"
-                          width={14}
-                          height={14}
-                        />
-                        <span className="ir_pm">로그인</span>
-                      </Link>
-                    )}
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <nav className="gnb">
-              <ul>
-                <li><Link className="small_tr" href="/">전체</Link></li>
-                <li><Link className="small_tr" href="/store">중고거래</Link></li>
-                <li><Link className="small_tr" href="/brands">브랜드</Link></li>
-                <li><Link className="small_tr" href="/community">커뮤니티</Link></li>
-              </ul>
-            </nav>
-          </header>
-          <main>
-            {children}
-          </main>
+          {/* 헤더 */}
+          <HeaderClient serverUser={user} />
+          {/* 메인 */}
+          <main>{children}</main>
+          {/* 푸터 */}
           <footer>
             <div className="footer_logo">
               <Link href="/">
-                <Image
-                  src="/images/logo_white.png"
-                  alt="campick logo"
-                  width={168}
-                  height={69}
-                />
-                <span className="ir_pm">campick</span>
+                  <Image
+                    src="/images/logo_white.png"
+                    alt="campick logo"
+                    width={168}
+                    height={69}
+                  />
+                  <span className="ir_pm">campick</span>
               </Link>
             </div>
             <nav>
               <ul className="nav_links small_tb">
-                <li>
-                  <Link href="/terms">
-                    <span>이용약관</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/privacy">
-                    <span>개인정보처리방침</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/guide">
-                    <span>이용안내</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/notice">
-                    <span>공지사항</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/content">
-                    <span>콘텐츠</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/partnership">
-                    <span>입점/제휴문의</span>
-                  </Link>
-                </li>
+                <li><Link href="/terms"><span>이용약관</span></Link></li>
+                <li><Link href="/privacy"><span>개인정보처리방침</span></Link></li>
+                <li><Link href="/guide"><span>이용안내</span></Link></li>
+                <li><Link href="/notice"><span>공지사항</span></Link></li>
+                <li><Link href="/content"><span>콘텐츠</span></Link></li>
+                <li><Link href="/partnership"><span>입점/제휴문의</span></Link></li>
               </ul>
             </nav>
             <div className="footer_content small_tr">
               <div className="company_info">
                 <h3 className="company_name small_tb">(주)캠픽</h3>
                 <div className="company_details">
-                  <p>사업자등록번호:456-25-46512 | 대표:허석윤, 이희재</p>
-                  <p>통신판매업신고:2025-서울중부-3256호 | 서울시영등포구청</p>
-                  <address>본사:서울 영등포구 0452-0684(예금주:주식회사 캠픽)</address>
-                  <address>주소:서울특별시 중구로 수표로 96, 2층 (국일빌딩멜파스)</address>
-                  <p>비즈니스 문의:<a href="mailto:abiz@campick.co">abiz@campick.co</a></p>
+                  <p>사업자등록번호:111-11-1111 | 대표:홍길동1, 홍길동2</p>
+                  <p>통신판매업신고:1111-서울중부-1111호 | 종로그린컴퓨터학원</p>
+                  <address>본사:종로 1111-1111(예금주:주식회사 캠픽)</address>
+                  <address>주소:서울특별시 종로구 (종로그린컴퓨터학원)</address>
+                  <p>비즈니스 문의: <a href="mailto:abiz@campick.co">abiz@campick.co</a></p>
                 </div>
               </div>
               <div className="customer_service">
@@ -222,7 +110,7 @@ export default async function RootLayout({ children }) {
             </p>
           </footer>
         </div>
-      </body >
-    </html >
+      </body>
+    </html>
   );
 }
