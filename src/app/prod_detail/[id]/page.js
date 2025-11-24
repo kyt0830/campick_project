@@ -33,23 +33,7 @@ export default async function ProdDetail({ params }) {
   if (all_error) {
     console.error("전체 상품 조회 실패:", all_error.message);
   }
-  // 4. 상품 조회가 끝난 뒤 -> prod_id 기반으로 채팅룸 조회
-  let chatRoom = null;
-  let chatRoom_error = null;
-
-  if (product?.prod_id) {
-    const { data, error } = await supabase
-      .from("ChatRoom")
-      .select("*")
-      .eq("prod_id", product.prod_id) // ✅ 하드코딩 제거
-      .single();
-    chatRoom = data;
-    chatRoom_error = error;
-    if (chatRoom_error) {
-      console.error("채팅룸 조회 실패:", chatRoom_error.message);
-    }
-  }
-  console.log('채팅룸', chatRoom);
+  
   const tags = product.tag.split(',');
   const images = product.prod_images.split(',');
   return (
@@ -138,7 +122,9 @@ export default async function ProdDetail({ params }) {
               </>
             ) : (
               <>
-                <button className={styles.chat}><Link href={user && product.user_id === user.id ? "/messages" : `/chat/${chatRoom.chat_id}`}>채팅하기</Link></button >
+                <button className={styles.chat}> <Link href="/chat/16" className={styles.chat}>
+        채팅하기
+      </Link></button >
                 <button className={styles.pay}><Link href="/payment_select">결제하기</Link></button >
               </>
             )}
