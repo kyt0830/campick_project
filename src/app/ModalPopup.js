@@ -16,11 +16,13 @@ export default function ModalPopup({ content }) {
       <div style={styles.modal}>
         <h2 style={styles.notice}>안내의 말씀</h2>
         <div style={styles.body}>
-            <p>
-                현재 페이지는 <span style={styles.strong}>Supabase의 인증 정책</span>을 완화해 두었습니다.<br/>
-                따라서 <span style={styles.strong}>회원가입, 로그인 과정 없이</span> 포트폴리오 기능을 체험할 수 있으며<br/>
-                개인 정보는 별도로 수집하지 않습니다!
-            </p>
+          <p>
+            <span style={styles.strong}>방문해 주셔서 감사합니다!</span><br />
+            보다 원활한 서비스 이용을 위해 아래 테스트 계정으로 로그인 후 이용해 주시길 바랍니다.<br />
+            <br />
+            테스트 아이디: user01@test.com<br/>
+            테스트 비밀번호: 1234
+          </p>
         </div>
         <button style={styles.button} onClick={() => setOpen(false)}>
           닫기
@@ -40,10 +42,10 @@ const styles = {
     alignItems: 'center',
     zIndex: 9999,
   },
-  notice:{
-    fontSize : '24px',
-    textAlign : 'center',
-    fontWeight : 'bold'
+  notice: {
+    fontSize: '24px',
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
   modal: {
     background: '#fff',
@@ -68,8 +70,8 @@ const styles = {
     borderRadius: '6px',
     cursor: 'pointer',
   },
-  strong:{
-    fontWeight : 'bold',
-    color : "#b00303ff"
+  strong: {
+    fontWeight: 'bold',
+    color: "#333"
   }
 };

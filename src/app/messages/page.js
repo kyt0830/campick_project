@@ -22,6 +22,7 @@ export default async function messages() {
   const supabase = await createClient();
 
   const { data: { user } } = await supabase.auth.getUser(); // 유저 정보 조회
+  if (!user) return <p>로그인이 필요합니다.</p>;
   const { data: seller_chat, error: seller_error } = await supabase // 내가 판매자인 채팅
     .from("ChatRoom")
     .select()
@@ -79,7 +80,7 @@ export default async function messages() {
       </div>
       {/* //user_profile mypage.ver */}
 
-  
+
 
       {/* 클라이언트 컴포넌트로 탭 기능 분리 */}
       <ChatTabs
