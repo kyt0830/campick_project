@@ -15,6 +15,7 @@ import ProductSection from "./ProductSection";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
+import ModalPopup from "./ModalPopup";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -27,6 +28,8 @@ export default async function Home() {
 
   return (
     <>
+      <ModalPopup>
+      </ModalPopup>
       {/* common_slide_content */}
       <div className={`common_slider_container ${styles.common_slider_container}`}>
         <div className="common_slider_wrapper">
