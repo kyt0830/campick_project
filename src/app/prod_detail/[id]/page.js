@@ -122,7 +122,7 @@ export default async function ProdDetail({ params }) {
               </>
             ) : (
               <>
-                <button className={styles.chat}> <Link href="/chat/16" className={styles.chat}>
+                <button className={styles.chat}> <Link href="/chat/17" className={styles.chat}>
         채팅하기
       </Link></button >
                 <button className={styles.pay}><Link href="/payment_select">결제하기</Link></button >
